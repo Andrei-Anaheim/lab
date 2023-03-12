@@ -1,0 +1,300 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between; 
+    background-color: rgb(243,240,241);
+    width: 100vw;
+}
+
+.header_left, .header_right {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.logo {
+    margin: 0 10px;
+    width: 80px;
+    height: 80px;
+}
+
+.menu_nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.menu_item {
+    margin: 0 10px;
+    font: normal normal 20px/20px Arial;
+    cursor: pointer;
+}
+
+.login {
+    margin: 0 10px;
+    font: normal normal 20px/20px Arial;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 5px;
+}
+.login:hover {
+    background-color: lightskyblue;
+}
+
+.user {
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: orange;
+    width: 30px;
+    height: 30px;
+    font: normal bold 20px/28px Arial;
+    text-align: center;
+    cursor: pointer;
+}
+
+.menu_item:hover {
+    color: lightslategray;
+}
+
+.popup_sigh {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+.popup_sigh_box {
+    font: normal normal 20px/20px Arial;
+    color: white;
+    text-align: center;
+}
+
+.buttons_nav {
+    width: 10%;
+    margin: 10px auto;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+
+.red_status {
+    color:red;
+    font: normal normal 15px/15px Arial;
+}
+
+.green_status {
+    color:green;
+    font: normal normal 15px/15px Arial;
+}
+
+.button {
+    margin: 10px;
+    font: normal normal 20px/20px Arial;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 5px;
+    width:fit-content;
+}
+
+.news_list {
+    display: flex;
+    flex-direction: column;
+}
+
+.news_list_item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(150, 148, 148);
+    margin: 5px 20px;
+    padding: 5px 15px;
+}
+
+.news_title {
+    font: normal bold 25px/30px Arial;
+    color:blue;
+    cursor: pointer;
+}
+
+.news_subtext {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.news_tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.tag {
+    border: 1px solid grey;
+    margin: 0px 5px;
+    font: normal normal 15px/15px Arial;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.current_news {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 10px auto;
+}
+
+.news_subtext_full {
+    margin-top: 20px;
+    white-space: wrap;
+    font: normal normal 20px/25px Arial;
+}
+
+.reaction {
+    margin-top: 15px;
+}
+
+.count {
+    font: normal normal 32px/32px Arial;
+}
+
+.comments_title {
+    font: normal normal 30px/30px Arial; 
+    margin: 10px 0px;
+    border-top: 2px solid black;
+}
+
+.your_comment {
+    margin: 10px auto;
+    width: 90vw;
+    height: 100px;
+    font: normal normal 20px/20px Arial;
+}
+
+.comments_list_item {
+    border: 1px solid grey;
+    margin: 10px 0px;
+}
+
+.create_news_page {
+    display:flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.your_news {
+    margin: 10px 0px;
+    padding: 5px;
+}
+
+.calendar_box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin: 30px 0px;
+    /* align-items: center; */
+}
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 10px 0px;
+    font: normal normal 20px/25px Arial;
+    text-align: center;
+}
+
+.year {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: red;
+    padding: 10px;
+}
+
+.month {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: pink;
+    padding: 10px;
+}
+
+.casual_row td {
+    border: 1px solid grey;
+    height: 30px;
+}
+
+.plans {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 10px 0px;
+    font: normal normal 18px/20px Arial;
+    text-align:start;
+} 
+
+.plans_date {
+    font: normal normal 20px/25px Arial;
+    text-align: center;
+    background-color: red;
+    padding: 10px;
+}
+
+.buttons {
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: lightskyblue;
+}
+
+.active {
+    font: normal bold 20px/20px Arial;
+    color: darkgreen;
+}
+
+.url {
+    color: rgb(8, 49, 63);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.hide {
+    display: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+}
