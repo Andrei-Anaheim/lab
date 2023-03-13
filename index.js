@@ -41,6 +41,12 @@ function changeMenuPage(e) {
                 document.getElementById('suggest_news').classList.remove('hide');
                 document.getElementById('current_news').classList.add('hide');
                 document.getElementById('create_news_page').classList.add('hide');
+            } else if (e.target.id.split('menu_item_')[1]-5 == 0) {
+                document.getElementById('analyzers_box').classList.remove('hide');
+                document.getElementById('areas_1').classList.add('hide');
+                document.getElementById('areas_2').classList.add('hide');
+                document.getElementById('areas_3').classList.add('hide');
+                document.getElementById('areas_4').classList.add('hide');
             }
         }
     }
@@ -148,4 +154,12 @@ function plusMonth() {
     document.getElementById('current_month').innerText = month;
     document.getElementById('current_year').innerText = year;
     buildCalendar(year, month, show_date_info);
+}
+
+const areas = document.querySelectorAll('analyzers_box');
+for (let i=0; i<areas.length; i+=1) {
+    areas[i].addEventListener('click', ()=>{
+        for (let j=0; j<areas.length; j+=1) document.getElementById(`areas_${j}`).classList.add('hide');
+        document.getElementById(`areas_${i}`).classList.remove('hide');
+    })
 }
