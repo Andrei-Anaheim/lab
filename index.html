@@ -16,9 +16,9 @@
                 <div class="menu_item" id="menu_item_2">Энциклопедия</div>
                 <div class="menu_item" id="menu_item_3">Календарь</div>
                 <div class="menu_item" id="menu_item_4">Биржа труда</div>
-                <div class="menu_item" id="menu_item_5">Лабораторное оборудование</div>
-                <div class="menu_item" id="menu_item_6">Консультация</div>
-                <div class="menu_item" id="menu_item_7">Развлечения</div>
+                <!-- <div class="menu_item" id="menu_item_5">Лабораторное оборудование</div> -->
+                <div class="menu_item" id="menu_item_5">Консультация</div>
+                <div class="menu_item" id="menu_item_6">Развлечения</div>
             </div>
         </div>
         <div class="header_right">
@@ -121,50 +121,210 @@
             </div>
         </div>
         <div class="wiki_box main"></div>
-        <div class="calendar_box main hide">
-            <div class="calendar">
-                <div class="year">
-                    <div class="clickable" id="year_left" onclick="minusYear()"><</div>
-                    <div id="current_year">2019</div>
-                    <div class="clickable" id="year_right" onclick="plusYear()">></div>
+        <div class="calendar_box calendar_background_dark main hide" id="calendar_box">
+            <div class="calendar_buttons_big" id="calendar_buttons">
+                <div class="card" id="conferences">
+                    <div class="card__front"><p>Конференции</p></div>
+                    <div class="card__back"><span>Календарь научных конференций бла-бла-бла бла-бла-бла бла-бла-бла</span><p class="details">Подробнее</p></div>
                 </div>
-                <div class="month">
-                    <div class="clickable" id="month_left" onclick="minusMonth()"><</div>
-                    <div id="current_month">Март</div>
-                    <div class="clickable" id="month_right" onclick="plusMonth()">></div>
+                <div class="card" id="events">
+                    <div class="card__front"><p>События</p></div>
+                    <div class="card__back"><span>Календарь мероприятий прикладного характера бла-бла-бла бла-бла-бла</span><p class="details">Подробнее</p></div>
                 </div>
-                <table class="calendar_table" id="calendar_table">
-                    <tbody>
-                        <tr class="super_row">
-                            <td>Пн</td><td>Вт</td><td>Ср</td><td>Чт</td><td>Пт</td><td>Сб</td><td>Вс</td>
-                        </tr>
-                        <tr class="casual_row">
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        </tr>
-                        <tr class="casual_row">
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        </tr>
-                        <tr class="casual_row">
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        </tr>
-                        <tr class="casual_row">
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        </tr>
-                        <tr class="casual_row">
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        </tr>
-                        <tr class="casual_row">
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="card" id="online_events">
+                    <div class="card__front"><p>Онлайн-мероприятия</p></div>
+                    <div class="card__back"><span>Календарь онлайн-мероприятий: лекции, вебинары, онлайн-конференции, выставки</span><p class="details">Подробнее</p></div>
+                </div>
             </div>
-            <div class="plans" id="plans">
-                <div class="plans_date" id="date_of_interest"></div>
+            <div class="calendar_filters hide" id="calendar_filters">
+                <select class="calendar_filters_item" id="specialisation_select">
+                    <option>Фильтр по специальности</option>
+                    <option>Авиационная и космическая медицина</option>
+                    <option>Акушерство и гинекология</option>
+                    <option>Аллергология и иммунология</option>
+                    <option>Анестезиология и реаниматология</option>
+                    <option>Бактериология</option>
+                    <option>Вирусология</option>
+                    <option>Водолазная медицина</option>
+                    <option>Гастроэнтерология</option>
+                    <option>Гематология</option>
+                    <option>Генетика</option>
+                    <option>Гериатрия</option>
+                    <option>Гигиена и санитария</option>
+                    <option>Гистология</option>
+                    <option>Дезинфектология</option>
+                    <option>Дерматовенерология</option>
+                    <option>Детская кардиология</option>
+                    <option>и т.д.</option>
+                </select>
+                <select class="calendar_filters_item" id="city_select">
+                    <option>Фильтр по городу</option>
+                    <option>Санкт-Петербург</option>
+                    <option>Москва</option>
+                    <option>Новосибирск</option>
+                    <option>Екатеринбург</option>
+                    <option>Нижний Новгород</option>
+                    <option>Казань</option>
+                    <option>Челябинск</option>
+                    <option>Красноярск</option>
+                    <option>Самара</option>
+                    <option>Уфа</option>
+                    <option>Ростов-на-Дону</option>
+                    <option>Омск</option>
+                    <option>Краснодар</option>
+                    <option>Воронеж</option>
+                    <option>Пермь</option>
+                    <option>Волгоград</option>
+                    <option>и т.д.</option>
+                </select>
+            </div>
+            <div class="calendar_data hide" id="calendar_data">
+                <div class="calendar">
+                    <div class="year">
+                        <div class="clickable" id="year_left" onclick="minusYear()"><</div>
+                        <div id="current_year">2019</div>
+                        <div class="clickable" id="year_right" onclick="plusYear()">></div>
+                    </div>
+                    <div class="month">
+                        <div class="clickable" id="month_left" onclick="minusMonth()"><</div>
+                        <div id="current_month">Март</div>
+                        <div class="clickable" id="month_right" onclick="plusMonth()">></div>
+                    </div>
+                    <table class="calendar_table" id="calendar_table">
+                        <tbody>
+                            <tr class="super_row">
+                                <td>Пн</td><td>Вт</td><td>Ср</td><td>Чт</td><td>Пт</td><td>Сб</td><td>Вс</td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="centered button" id="show_all_events_button"></div>
+                </div>
+                <div class="plans" id="plans">
+                    <div class="plans_date" id="date_of_interest"></div>
+                </div>
+            </div>
+            <div class="all_events hide" id="all_events">
+                <div class="event_item">
+                    <div class="event_item_info">
+                        <div class="event_item_date">01.03.2023</div>
+                        <div class="event_item_city">Санкт-Петербург</div>
+                    </div>
+                    <div class="event_item_title">"Тяготы и невзгоды врачей-акушеров"</div>
+                    <div class="event_item_type">Конференция</div>
+                    <div class="event_item_category">Акушерство и гинекология</div>
+                    <div class="event_item_location">Гостиница "Санкт-Петербург"</div>
+                    <div class="event_item_time">10.00-17.00</div>
+                </div>
+                <div class="event_item">
+                    <div class="event_item_info">
+                        <div class="event_item_date">14-15.03.2023</div>
+                        <div class="event_item_city">Воронеж</div>
+                    </div>
+                    <div class="event_item_title">"Здоровье женщины — здоровье нации"</div>
+                    <div class="event_item_type">Конференция</div>
+                    <div class="event_item_category">Акушерство и гинекология</div>
+                    <div class="event_item_location">Отель "Benefit Plaza"</div>
+                    <div class="event_item_time">10.00-17.00</div>
+                </div>
+                <div class="event_item">
+                    <div class="event_item_info">
+                        <div class="event_item_date">16-18.03.2023</div>
+                        <div class="event_item_city">Москва</div>
+                    </div>
+                    <div class="event_item_title">"Репродуктивный потенциал России: весенние контраверсии"</div>
+                    <div class="event_item_type">Конференция</div>
+                    <div class="event_item_category">Акушерство и гинекология</div>
+                    <div class="event_item_location">Отель "Рэдиссон Славянская"</div>
+                    <div class="event_item_time">10.00-17.00</div>
+                </div>
+                <div class="event_item">
+                    <div class="event_item_info">
+                        <div class="event_item_date">01.03.2023</div>
+                        <div class="event_item_city">Санкт-Петербург</div>
+                    </div>
+                    <div class="event_item_title">"Тяготы и невзгоды врачей-акушеров"</div>
+                    <div class="event_item_type">Конференция</div>
+                    <div class="event_item_category">Акушерство и гинекология</div>
+                    <div class="event_item_location">Гостиница "Санкт-Петербург"</div>
+                    <div class="event_item_time">10.00-17.00</div>
+                </div>
+                <div class="event_item">
+                    <div class="event_item_info">
+                        <div class="event_item_date">14-15.03.2023</div>
+                        <div class="event_item_city">Воронеж</div>
+                    </div>
+                    <div class="event_item_title">"Здоровье женщины — здоровье нации"</div>
+                    <div class="event_item_type">Конференция</div>
+                    <div class="event_item_category">Акушерство и гинекология</div>
+                    <div class="event_item_location">Отель "Benefit Plaza"</div>
+                    <div class="event_item_time">10.00-17.00</div>
+                </div>
+                <div class="event_item">
+                    <div class="event_item_info">
+                        <div class="event_item_date">16-18.03.2023</div>
+                        <div class="event_item_city">Москва</div>
+                    </div>
+                    <div class="event_item_title">"Репродуктивный потенциал России: весенние контраверсии"</div>
+                    <div class="event_item_type">Конференция</div>
+                    <div class="event_item_category">Акушерство и гинекология</div>
+                    <div class="event_item_location">Отель "Рэдиссон Славянская"</div>
+                    <div class="event_item_time">10.00-17.00</div>
+                </div>
+                <div class="event_item">
+                    <div class="event_item_info">
+                        <div class="event_item_date">01.03.2023</div>
+                        <div class="event_item_city">Санкт-Петербург</div>
+                    </div>
+                    <div class="event_item_title">"Тяготы и невзгоды врачей-акушеров"</div>
+                    <div class="event_item_type">Конференция</div>
+                    <div class="event_item_category">Акушерство и гинекология</div>
+                    <div class="event_item_location">Гостиница "Санкт-Петербург"</div>
+                    <div class="event_item_time">10.00-17.00</div>
+                </div>
+                <div class="event_item">
+                    <div class="event_item_info">
+                        <div class="event_item_date">14-15.03.2023</div>
+                        <div class="event_item_city">Воронеж</div>
+                    </div>
+                    <div class="event_item_title">"Здоровье женщины — здоровье нации"</div>
+                    <div class="event_item_type">Конференция</div>
+                    <div class="event_item_category">Акушерство и гинекология</div>
+                    <div class="event_item_location">Отель "Benefit Plaza"</div>
+                    <div class="event_item_time">10.00-17.00</div>
+                </div>
+                <div class="event_item">
+                    <div class="event_item_info">
+                        <div class="event_item_date">16-18.03.2023</div>
+                        <div class="event_item_city">Москва</div>
+                    </div>
+                    <div class="event_item_title">"Репродуктивный потенциал России: весенние контраверсии"</div>
+                    <div class="event_item_type">Конференция</div>
+                    <div class="event_item_category">Акушерство и гинекология</div>
+                    <div class="event_item_location">Отель "Рэдиссон Славянская"</div>
+                    <div class="event_item_time">10.00-17.00</div>
+                </div>
             </div>
         </div>
         <div class="vacancy_box main"></div>
-        <div class="instruments_box main hide">
+        <!-- <div class="instruments_box main hide">
             <div class="analyzers_box hide" id="analyzers_box">
                 <div class="analyzers" id="biochemistry">Биохимические анализаторы</div>
                 <div class="analyzers" id="immunochemistry">Иммунохимические анализаторы</div>
@@ -207,8 +367,45 @@
                 <div class="analyzers">Mindrey</div>
                 <div class="analyzers">77 Elektronika</div>
             </div> 
+        </div> -->
+        <div class="questions_box questions_bkg main hide">
+            <div class="calendar_buttons_big" id="question_buttons">
+                <div class="card" id="forum">
+                    <div class="card__front"><p>Форум</p></div>
+                    <div class="card__back"><span>Задайте вопрос на форуме и получите ответ от неравнодушных коллег. Отвечайте на чужие вопросы и зарабатывайте очки репутации</span><p class="details">Открыть форум</p></div>
+                </div>
+                <div class="card" id="expert">
+                    <div class="card__front"><p>Помощь эксперта</p></div>
+                    <div class="card__back"><span>Задайте вопрос одному из экспертов сайта. Доступно для пользователей с положительной репутацией</span><p class="details">Задать вопрос</p></div>
+                </div>
+                <div class="card" id="clinical_cases">
+                    <div class="card__front"><p>Библиотека клинических случаев</p></div>
+                    <div class="card__back"><span>Изучайте клинические случаи в нашей библиотеке</span><p class="details">Подробнее</p></div>
+                </div>
+            </div>
+            <div class="news_list" id="forum_list">
+                <div class="news_list_item" id="forum_0">
+                    <p class="news_title">Помогите, у пациента какая-то сыпь, а я прогуливал пары по иммунологии</p>
+                    <p class="news_subtext">Автор: docdre98, 21.03.2023</p>
+                </div>
+                <div class="news_list_item" id="forum_1">
+                    <p class="news_title">Чего-то никакие медпредставители ко мне не приходят и не предлагают встать на процент, что я делаю не так?</p>
+                    <p class="news_subtext">Автор: docwatson, 20.03.2023</p>
+                </div>
+                <div class="news_list_item" id="forum_1">
+                    <p class="news_title">Первый день как я стал участковым. Все плохо. Подбодрите меня:)</p>
+                    <p class="news_subtext">Автор: doclobanov, 19.03.2023</p>
+                </div>
+                <div class="button" id="suggest_topic">Задать вопрос</div>
+            </div>
+            
+            <div class="create_news_page hide" id="create_topic_page">
+                <input class="your_news" type="text" placeholder="Введите вопрос" id="your_topic_title">
+                <textarea class="your_news" id="your_topic_text" placeholder="Введите текст вопроса, опишите суть максимально подробно" rows="30"></textarea>
+                <div class="button" id="submit_suggested_topic">Опубликовать вопрос</div>
+                <p class="green_status hide" id="suggest_status_topic">Вопрос успешно опубликован!</p>
+            </div>
         </div>
-        <div class="questions_box main"></div>
         <div class="games_box main"></div>
     </main>
     <footer>
