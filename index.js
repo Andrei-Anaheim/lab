@@ -41,12 +41,26 @@ function changeMenuPage(e) {
                 document.getElementById('suggest_news').classList.remove('hide');
                 document.getElementById('current_news').classList.add('hide');
                 document.getElementById('create_news_page').classList.add('hide');
+                // } else if (e.target.id.split('menu_item_')[1]-5 == 0) {
+            //     document.getElementById('analyzers_box').classList.remove('hide');
+            //     document.getElementById('areas_1').classList.add('hide');
+            //     document.getElementById('areas_2').classList.add('hide');
+            //     document.getElementById('areas_3').classList.add('hide');
+            //     document.getElementById('areas_4').classList.add('hide');
+            } else if (e.target.id.split('menu_item_')[1]-3 == 0) {
+                document.getElementById('calendar_box').classList = 'calendar_box calendar_background_dark main';
+                document.getElementById('calendar_buttons').classList = 'calendar_buttons_big';
+                document.getElementById('calendar_filters').classList.add('hide');
+                document.getElementById('calendar_data').classList.add('hide');
+                document.getElementById('all_events').classList.add('hide');
+                document.getElementById('conferences').classList.remove('selected_card')
+                document.getElementById('events').classList.remove('selected_card')
+                document.getElementById('online_events').classList.remove('selected_card')
             } else if (e.target.id.split('menu_item_')[1]-5 == 0) {
-                document.getElementById('analyzers_box').classList.remove('hide');
-                document.getElementById('areas_1').classList.add('hide');
-                document.getElementById('areas_2').classList.add('hide');
-                document.getElementById('areas_3').classList.add('hide');
-                document.getElementById('areas_4').classList.add('hide');
+                document.getElementById('question_buttons').classList.remove('hide');
+                document.getElementById('forum_list').classList.add('hide');
+                document.getElementById('create_topic_page').classList.add('hide');
+                document.getElementById('current_topic').classList.add('hide');
             }
         }
     }
@@ -110,6 +124,7 @@ function buildCalendar(year, month, date_info) {
         document.getElementById('calendar_table').getElementsByTagName('td')[5+(start_day==0?7:start_day)+i].addEventListener('click',(e)=>{openDateInfo(e.target.innerText)});
     }
     document.getElementById('date_of_interest').innerText = date_info;
+    document.getElementById('show_all_events_button').innerText = `Показать список мероприятий за ${months[month]} ${year}`;
 }
 function openDateInfo(date) {
     document.getElementById('plans').innerHTML = `<div class="plans_date" id="date_of_interest"></div>`
@@ -162,4 +177,65 @@ for (let i=0; i<areas.length; i+=1) {
         for (let j=0; j<areas.length; j+=1) document.getElementById(`areas_${j}`).classList.add('hide');
         document.getElementById(`areas_${i}`).classList.remove('hide');
     })
+}
+
+document.getElementById('conferences').addEventListener('click', showConferences)
+document.getElementById('events').addEventListener('click', showEvents)
+document.getElementById('online_events').addEventListener('click', showOnlineEvents)
+function showConferences() {
+    document.getElementById('calendar_buttons').classList = 'calendar_buttons';
+    document.getElementById('calendar_box').classList.remove('calendar_background_dark');
+    document.getElementById('calendar_box').classList.add('calendar_background_light');    
+    document.getElementById('calendar_filters').classList.remove('hide');
+    document.getElementById('calendar_data').classList.remove('hide');
+    document.getElementById('conferences').classList.add('selected_card')
+    document.getElementById('events').classList.remove('selected_card')
+    document.getElementById('online_events').classList.remove('selected_card')
+}
+function showEvents() {
+    document.getElementById('calendar_buttons').classList = 'calendar_buttons';
+    document.getElementById('calendar_box').classList.remove('calendar_background_dark');
+    document.getElementById('calendar_box').classList.add('calendar_background_light');  
+    document.getElementById('calendar_filters').classList.remove('hide');
+    document.getElementById('calendar_data').classList.remove('hide');
+    document.getElementById('conferences').classList.remove('selected_card')
+    document.getElementById('events').classList.add('selected_card')
+    document.getElementById('online_events').classList.remove('selected_card')
+}
+function showOnlineEvents() {
+    document.getElementById('calendar_buttons').classList = 'calendar_buttons';
+    document.getElementById('calendar_box').classList.remove('calendar_background_dark');
+    document.getElementById('calendar_box').classList.add('calendar_background_light');  
+    document.getElementById('calendar_filters').classList.remove('hide');
+    document.getElementById('calendar_data').classList.remove('hide');
+    document.getElementById('conferences').classList.remove('selected_card')
+    document.getElementById('events').classList.remove('selected_card')
+    document.getElementById('online_events').classList.add('selected_card')
+}
+
+document.getElementById('show_all_events_button').addEventListener('click', showAllEvents);
+function showAllEvents() {
+    document.getElementById('all_events').classList.remove('hide');
+    document.getElementById('calendar_data').classList.add('hide');
+}
+
+document.getElementById('forum').addEventListener('click',showForum);
+document.getElementById('expert').addEventListener('click',showExpert);
+function showForum() {
+    document.getElementById('question_buttons').classList.add('hide');
+    document.getElementById('forum_list').classList.remove('hide');
+}
+function showExpert() {
+    document.getElementById('question_buttons').classList.add('hide');
+    document.getElementById('create_topic_page').classList.remove('hide');
+}
+document.getElementById('suggest_topic').addEventListener('click',createForumTopic);
+function createForumTopic() {
+    document.getElementById('forum_list').classList.add('hide');
+    document.getElementById('create_topic_page').classList.remove('hide');
+}
+document.getElementById('forum_0').addEventListener('click',showForumTopic) 
+function showForumTopic() {
+    document.getElementById('forum_list').classList.add('hide');
+    document.getElementById('current_topic').classList.remove('hide');
 }
