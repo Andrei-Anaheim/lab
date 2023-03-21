@@ -159,7 +159,7 @@
     cursor: pointer;
 }
 
-.current_news {
+.current_news, .current_topic {
     display: flex;
     flex-direction: column;
     width: 90%;
@@ -174,6 +174,10 @@
 
 .reaction {
     margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    min-width: 120px;
 }
 
 .count {
@@ -468,7 +472,13 @@
 }
 
 
-
+.questions_box {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 100px);
+    width: 100vw;
+    padding: 10px 0px;
+}
 .questions_bkg {
     background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) ), url('https://mypromed.ru/images/p593128v1920x1080s0.jpg');
     background-size: cover; 
@@ -491,6 +501,11 @@
     color: rgb(8, 49, 63);
     text-decoration: underline;
     cursor: pointer;
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
 }
 
 .bold {

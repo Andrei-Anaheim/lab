@@ -34,7 +34,6 @@ function changeMenuPage(e) {
 
         e.target.classList = 'menu_item active';
         if(main[e.target.id.split('menu_item_')[1]-1]) {
-            console.log(main[e.target.id.split('menu_item_')[1]-1]);
             main[e.target.id.split('menu_item_')[1]-1].classList.remove('hide');
             if (e.target.id.split('menu_item_')[1]-1 == 0) {
                 document.getElementById('news_list').classList.remove('hide');
@@ -58,7 +57,10 @@ function changeMenuPage(e) {
                 document.getElementById('events').classList.remove('selected_card')
                 document.getElementById('online_events').classList.remove('selected_card')
             } else if (e.target.id.split('menu_item_')[1]-5 == 0) {
-                console.log('eeee')
+                document.getElementById('question_buttons').classList.remove('hide');
+                document.getElementById('forum_list').classList.add('hide');
+                document.getElementById('create_topic_page').classList.add('hide');
+                document.getElementById('current_topic').classList.add('hide');
             }
         }
     }
@@ -215,4 +217,25 @@ document.getElementById('show_all_events_button').addEventListener('click', show
 function showAllEvents() {
     document.getElementById('all_events').classList.remove('hide');
     document.getElementById('calendar_data').classList.add('hide');
+}
+
+document.getElementById('forum').addEventListener('click',showForum);
+document.getElementById('expert').addEventListener('click',showExpert);
+function showForum() {
+    document.getElementById('question_buttons').classList.add('hide');
+    document.getElementById('forum_list').classList.remove('hide');
+}
+function showExpert() {
+    document.getElementById('question_buttons').classList.add('hide');
+    document.getElementById('create_topic_page').classList.remove('hide');
+}
+document.getElementById('suggest_topic').addEventListener('click',createForumTopic);
+function createForumTopic() {
+    document.getElementById('forum_list').classList.add('hide');
+    document.getElementById('create_topic_page').classList.remove('hide');
+}
+document.getElementById('forum_0').addEventListener('click',showForumTopic) 
+function showForumTopic() {
+    document.getElementById('forum_list').classList.add('hide');
+    document.getElementById('current_topic').classList.remove('hide');
 }
