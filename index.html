@@ -121,19 +121,23 @@
             </div>
         </div>
         <div class="wiki_box main"></div>
-        <div class="calendar_box calendar_background_dark main hide" id="calendar_box">
-            <div class="calendar_buttons_big" id="calendar_buttons">
+        <div class="calendar_box calendar_background_light main hide" id="calendar_box">
+            <div class="calendar_buttons" id="calendar_buttons">
                 <div class="card" id="conferences">
-                    <div class="card__front"><p>Конференции</p></div>
-                    <div class="card__back"><span>Календарь научных конференций бла-бла-бла бла-бла-бла бла-бла-бла</span><p class="details">Подробнее</p></div>
+                    <div class="card__front"><p>Конференции, выставки</p></div>
+                    <div class="card__back"><span>Календарь научных конференций, выставок, семинаров, круглых столов</span><p class="details">Подробнее</p></div>
                 </div>
                 <div class="card" id="events">
-                    <div class="card__front"><p>События</p></div>
-                    <div class="card__back"><span>Календарь мероприятий прикладного характера бла-бла-бла бла-бла-бла</span><p class="details">Подробнее</p></div>
+                    <div class="card__front"><p>Экскурсии в ЛПУ</p></div>
+                    <div class="card__back"><span>Календарь экскурсий в ЛПУ для просмотра оборудования и организации работы</span><p class="details">Подробнее</p></div>
                 </div>
                 <div class="card" id="online_events">
                     <div class="card__front"><p>Онлайн-мероприятия</p></div>
                     <div class="card__back"><span>Календарь онлайн-мероприятий: лекции, вебинары, онлайн-конференции, выставки</span><p class="details">Подробнее</p></div>
+                </div>
+                <div class="card" id="unformal_events">
+                    <div class="card__front"><p>Неформальные встречи</p></div>
+                    <div class="card__back"><span>Я не знаю зачем это, но Вадим просил оставить :)</span><p class="details">Подробнее</p></div>
                 </div>
             </div>
             <div class="calendar_filters hide" id="calendar_filters">
@@ -158,24 +162,20 @@
                     <option>и т.д.</option>
                 </select>
                 <select class="calendar_filters_item" id="city_select">
-                    <option>Фильтр по городу</option>
-                    <option>Санкт-Петербург</option>
-                    <option>Москва</option>
-                    <option>Новосибирск</option>
-                    <option>Екатеринбург</option>
-                    <option>Нижний Новгород</option>
-                    <option>Казань</option>
-                    <option>Челябинск</option>
-                    <option>Красноярск</option>
-                    <option>Самара</option>
-                    <option>Уфа</option>
-                    <option>Ростов-на-Дону</option>
-                    <option>Омск</option>
-                    <option>Краснодар</option>
-                    <option>Воронеж</option>
-                    <option>Пермь</option>
-                    <option>Волгоград</option>
-                    <option>и т.д.</option>
+                    <option>Фильтр по региону</option>
+                    <option>Центральный ФО</option>
+                    <option>Северо-Западный ФО</option>
+                    <option>Южный ФО</option>
+                    <option>Северо-Кавказский ФО</option>
+                    <option>Приволжский ФО</option>
+                    <option>Уральский ФО</option>
+                    <option>Сибирский ФО</option>
+                    <option>Дальневосточный ФО</option>
+                </select>
+                <select class="calendar_filters_item" id="commercial_select">
+                    <option>Фильтр по организатору</option>
+                    <option>Государственный</option>
+                    <option>Коммерческий</option>
                 </select>
             </div>
             <div class="calendar_data hide" id="calendar_data">
@@ -215,12 +215,13 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="centered button" id="show_all_events_button"></div>
+                    
                 </div>
                 <div class="plans" id="plans">
                     <div class="plans_date" id="date_of_interest"></div>
                 </div>
             </div>
+            <h2 class="centered" >Ближайшие мероприятия</h2>
             <div class="all_events hide" id="all_events">
                 <div class="event_item">
                     <div class="event_item_info">
@@ -385,21 +386,84 @@
             </div>
             <div class="news_list hide" id="forum_list">
                 <div class="button" id="suggest_topic">Задать вопрос</div>
-                <div class="news_list_item" id="forum_0">
-                    <p class="news_title">Помогите, у пациента какая-то сыпь, а я прогуливал пары по иммунологии</p>
-                    <p class="news_subtext">Автор: docdre98, 20.03.2023</p>
+                <div class="forum_section">
+                    <p class="forum_header">Клиническая медицина</p>
+                    <div class="news_list_item" id="forum_0_1">
+                        <p class="news_title">Помогите, у пациента какая-то сыпь, а я прогуливал пары по иммунологии</p>
+                        <p class="news_subtext">Автор: docdre98, 20.03.2023</p>
+                    </div>
+                    <div class="news_list_item" id="forum_0_2">
+                        <p class="news_title">бла-бла-бла</p>
+                        <p class="news_subtext">Автор: docdre98, 20.03.2023</p>
+                    </div>
                 </div>
-                <div class="news_list_item" id="forum_1">
-                    <p class="news_title">Чего-то никакие медпредставители ко мне не приходят и не предлагают встать на процент, что я делаю не так?</p>
-                    <p class="news_subtext">Автор: docwatson, 20.03.2023</p>
+                <div class="forum_section">
+                    <p class="forum_header">Лабораторная медицина</p>
+                    <div class="news_list_item" id="forum_1_1">
+                        <p class="news_title">Помогите, кончился срок годности на дилюент DxH500, поделитесь штрихами</p>
+                        <p class="news_subtext">Автор: docdre98, 20.03.2023</p>
+                    </div>
+                    <div class="news_list_item" id="forum_1_2">
+                        <p class="news_title">бла-бла-бла</p>
+                        <p class="news_subtext">Автор: docdre98, 20.03.2023</p>
+                    </div>
                 </div>
-                <div class="news_list_item" id="forum_1">
-                    <p class="news_title">Первый день как я стал участковым. Все плохо. Подбодрите меня:)</p>
-                    <p class="news_subtext">Автор: doclobanov, 19.03.2023</p>
+                <div class="forum_section">
+                    <p class="forum_header">Финансовый отдел</p>
+                    <div class="news_list_item" id="forum_2_1">
+                        <p class="news_title">Чего-то никакие медпредставители ко мне не приходят и не предлагают встать на процент, что я делаю не так?</p>
+                        <p class="news_subtext">Автор: docwatson, 20.03.2023</p>
+                    </div>
+                    <div class="news_list_item" id="forum_2_2">
+                        <p class="news_title">бла-бла-бла</p>
+                        <p class="news_subtext">Автор: docwatson, 20.03.2023</p>
+                    </div>
+                </div>
+                <div class="forum_section">
+                    <p class="forum_header">Юридический отдел</p>
+                    <div class="news_list_item" id="forum_3_1">
+                        <p class="news_title">2 года выдавали значения MCHC не в тех единицах. Каким числом лучше уволить причастных сотрудников?</p>
+                        <p class="news_subtext">Автор: doccuddy, 20.03.2023</p>
+                    </div>
+                    <div class="news_list_item" id="forum_3_2">
+                        <p class="news_title">бла-бла-бла</p>
+                        <p class="news_subtext">Автор: doccuddy, 20.03.2023</p>
+                    </div>
+                </div>
+                <div class="forum_section">
+                    <p class="forum_header">Общие вопросы</p>
+                    <div class="news_list_item" id="forum_4_1">
+                        <p class="news_title">Я студент 3 курса. Хочу услышать мнение старших товарищей, стоит ли устраиваться на скорую?</p>
+                        <p class="news_subtext">Автор: morty, 20.03.2023</p>
+                    </div>
+                    <div class="news_list_item" id="forum_4_2">
+                        <p class="news_title">бла-бла-бла</p>
+                        <p class="news_subtext">Автор: morty, 20.03.2023</p>
+                    </div>
+                </div>
+                <div class="forum_section">
+                    <p class="forum_header">Флудилка</p>
+                    <div class="news_list_item" id="forum_5_1">
+                        <p class="news_title">Первый день как я стал участковым. Все плохо. Подбодрите меня:)</p>
+                        <p class="news_subtext">Автор: doclobanov, 20.03.2023</p>
+                    </div>
+                    <div class="news_list_item" id="forum_5_2">
+                        <p class="news_title">бла-бла-бла</p>
+                        <p class="news_subtext">Автор: doclobanov, 20.03.2023</p>
+                    </div>
                 </div>
             </div>
             <div class="create_news_page hide" id="create_topic_page">
                 <input class="your_news" type="text" placeholder="Введите вопрос" id="your_topic_title">
+                <select class="calendar_filters_item" id="specialisation_select">
+                    <option>Выберите раздел</option>
+                    <option>Клиническая медицина</option>
+                    <option>Лабораторная медицина</option>
+                    <option>Финансовые вопросы</option>
+                    <option>Юридические вопросы</option>
+                    <option>Общие вопросы</option>
+                    <option>Я затрудняюсь выбрать нужный раздел</option>
+                </select>
                 <textarea class="your_news" id="your_topic_text" placeholder="Введите текст вопроса, опишите суть максимально подробно" rows="30"></textarea>
                 <div class="button" id="submit_suggested_topic">Опубликовать вопрос</div>
                 <p class="green_status hide" id="suggest_status_topic">Вопрос успешно опубликован!</p>

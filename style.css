@@ -373,7 +373,7 @@
     position: relative;
     border: 1px solid green;
     border-radius: 15px;
-    width: 25%;
+    width: 20%;
     height: 90px;
     background-color: rgb(247, 249, 250);
     font: normal bold 20px/20px Arial;
@@ -483,6 +483,20 @@
     background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) ), url('https://mypromed.ru/images/p593128v1920x1080s0.jpg');
     background-size: cover; 
     background-position: center;
+}
+
+.forum_section {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(150, 148, 148);
+    margin: 5px 20px;
+    
+}
+
+.forum_header {
+    font: normal bold 20px/20px Arial;
+    text-align: center;
+    background-color:azure;
 }
 
 
