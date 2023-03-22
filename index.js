@@ -21,6 +21,23 @@ function CheckSighIn() {
         document.getElementById('user').classList.remove('hide');
     }
 }
+
+window.onload = getEventsData();
+let event_data = [];
+function getEventsData() {
+    fetch('calendar.json')
+    .then(res => res.json())
+    .then(data => {
+        event_data = Array.from(data)
+        console.log(event_data);
+    })
+}
+let event_filter = [0];
+let event_specific_filter = ['','',''];
+document.getElementById('specialisation_select').addEventListener('change',()=>{event_specific_filter[0] = (document.getElementById('specialisation_select').value == "Фильтр по специальности"? "" : document.getElementById('specialisation_select').value); buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);openDateInfo(new Date().getDate());})
+document.getElementById('city_select').addEventListener('change',()=>{event_specific_filter[1] = (document.getElementById('city_select').value == "Фильтр по региону"? "" :  document.getElementById('city_select').value); buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);openDateInfo(new Date().getDate());})
+document.getElementById('commercial_select').addEventListener('change',()=>{event_specific_filter[2] = (document.getElementById('commercial_select').value == "Фильтр по организатору"? "" : document.getElementById('commercial_select').value); buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);openDateInfo(new Date().getDate());})
+
 document.getElementById('menu_nav').addEventListener('click',(e)=>{changeMenuPage(e)})
 function changeMenuPage(e) {
     e.preventDefault();
@@ -53,9 +70,16 @@ function changeMenuPage(e) {
                 document.getElementById('calendar_filters').classList.remove('hide');
                 document.getElementById('calendar_data').classList.remove('hide');
                 document.getElementById('all_events').classList.remove('hide');
-                document.getElementById('conferences').classList.remove('selected_card')
-                document.getElementById('events').classList.remove('selected_card')
-                document.getElementById('online_events').classList.remove('selected_card')
+                document.getElementById('conferences').classList.remove('selected_card');
+                document.getElementById('events').classList.remove('selected_card');
+                document.getElementById('online_events').classList.remove('selected_card');
+                event_filter = [0];
+                event_specific_filter = ['','',''];
+                document.getElementById('specialisation_select').value = 'Фильтр по специальности';
+                document.getElementById('city_select').value = 'Фильтр по региону';
+                document.getElementById('commercial_select').value = 'Фильтр по организатору';
+                buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);
+                openDateInfo(new Date().getDate());
             } else if (e.target.id.split('menu_item_')[1]-5 == 0) {
                 document.getElementById('question_buttons').classList.remove('hide');
                 document.getElementById('forum_list').classList.add('hide');
@@ -110,64 +134,79 @@ function suggestNews() {
 const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 const months_ru = ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'];
 let show_date_info = `${new Date().getDate()} ${months_ru[new Date().getMonth()]} ${new Date().getFullYear()}`;
-window.onload = buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info);
-window.onload = openDateInfo(new Date().getDate());
-function buildCalendar(year, month, date_info) {
+// window.onload = buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info);
+// window.onload = openDateInfo(new Date().getDate());
+function buildCalendar(year, month, date_info, event_filter, event_specific_filter) {
     document.getElementById('current_year').innerText = year;
     document.getElementById('current_month').innerText = months[month];
     const start_day = new Date(year,month,1).getDay();
     const days_in_month = 33-new Date(year,month,33).getDate();
     const table_array = document.getElementById('calendar_table').getElementsByTagName('td');
     for (let i=7; i< table_array.length; i+=1) table_array[i].innerText = '';
+    let filter = event_filter == 1? "Конференция" : event_filter == 2 ? "Экскурсия" : "Онлайн";
+    let inter_event_data = Number(event_filter)>0? event_data.filter((el)=>Number(el.date_start.split('.')[1]) - 1 == month && Number(el.date_start.split('.')[2]) == year && el.type==filter):event_data.filter((el)=>Number(el.date_start.split('.')[1]) - 1 == month && Number(el.date_start.split('.')[2]) == year);
+    let current_filter_event_data = event_specific_filter[0]==""? inter_event_data : inter_event_data.filter((el)=>el.specialization.indexOf(event_specific_filter[0])!==-1);
+    current_filter_event_data = event_specific_filter[1]==""? current_filter_event_data : current_filter_event_data.filter((el)=>el.region.indexOf(event_specific_filter[1])!==-1);
+    current_filter_event_data = event_specific_filter[2]==""? current_filter_event_data : current_filter_event_data.filter((el)=>el.organizator_type.indexOf(event_specific_filter[2])!==-1);
+    console.log(current_filter_event_data, event_specific_filter[0]);
     for (let i=1; i<=days_in_month; i+=1) {
+        document.getElementById('calendar_table').getElementsByTagName('td')[5+(start_day==0?7:start_day)+i].classList.remove('eventable');
         document.getElementById('calendar_table').getElementsByTagName('td')[5+(start_day==0?7:start_day)+i].innerText = i
-        document.getElementById('calendar_table').getElementsByTagName('td')[5+(start_day==0?7:start_day)+i].addEventListener('click',(e)=>{openDateInfo(e.target.innerText)});
+        document.getElementById('calendar_table').getElementsByTagName('td')[5+(start_day==0?7:start_day)+i].addEventListener('click',(e)=>{
+            e.preventDefault();
+            openDateInfo(e.target.innerText)
+        });
+        for (j=0; j<current_filter_event_data.length; j+=1) {
+            if (Number(current_filter_event_data[j].date_start.split('.')[0]) == i) document.getElementById('calendar_table').getElementsByTagName('td')[5+(start_day==0?7:start_day)+i].classList.add('eventable');
+        }
     }
     document.getElementById('date_of_interest').innerText = date_info;
+    buildFutureEvents()
 }
 function openDateInfo(date) {
     document.getElementById('plans').innerHTML = `<div class="plans_date" id="date_of_interest"></div>`
     let year = Number(document.getElementById('current_year').innerText)
     let month = months.indexOf(document.getElementById('current_month').innerText)
-    show_date_info = `${date} ${months_ru[month]} ${year}`
+    let show_date_info = `${date} ${months_ru[month]} ${year}`
     document.getElementById('date_of_interest').innerText = show_date_info;
-    const hospitals = ['ПСПбГМУ им И.П. Павлова', 'ВМА им С.М. Кирова', 'КДП №1', 'Гостиница "Октябрьская"', 'МАПО','НМИЦ им. В. А. Алмазова', 'ВЦЭРМ им. А.М. Никифорова МЧС России'];
-    const areas = ['Всероссийский', 'Международный', 'Первый', 'Ежегодный', 'Экстренный', 'Ежемесячный', 'Петербургский']
-    const people = ['врачей-онкологов', 'специалистов лабораторной диагностики', 'рентгенологов и радиологов', 'врачей-кардиологов', 'IT-специалистов в сфере медицины', 'врачей-эндокринологов', 'специалистов-иммунологов']
-    const type = ['конгресс', 'съезд', 'сабантуй', 'симпозиум', 'форум', 'консилиум', 'пленум']
-    const text1 = document.createElement('span');
-    const text2 = document.createElement('span');
-    text1.innerHTML = `• 10.00 - 14.00 Cанкт-Петербург, ${hospitals[Math.round(Math.random()*6)]}. <p>${areas[Math.round(Math.random()*6)]} ${type[Math.round(Math.random()*6)]} ${people[Math.round(Math.random()*6)]}.`
-    text2.innerHTML = `• 15.00 - 17.00 Cанкт-Петербург, ${hospitals[Math.round(Math.random()*6)]}. <p>${areas[Math.round(Math.random()*6)]} ${type[Math.round(Math.random()*6)]} ${people[Math.round(Math.random()*6)]}.`
-    document.getElementById('plans').appendChild(text1);
-    document.getElementById('plans').appendChild(text2);
+    let filter = event_filter == 1? "Конференция" : event_filter == 2 ? "Экскурсия" : "Онлайн";
+    let current_day_data = Number(event_filter)>0? event_data.filter((el)=>Number(el.date_start.split('.')[0]) == date && Number(el.date_start.split('.')[1]) - 1 == month && Number(el.date_start.split('.')[2]) == year && el.type==filter):event_data.filter((el)=>Number(el.date_start.split('.')[0]) == date && Number(el.date_start.split('.')[1]) - 1 == month && Number(el.date_start.split('.')[2]) == year);
+    current_day_data = event_specific_filter[0]==""? current_day_data : current_day_data.filter((el)=>el.specialization.indexOf(event_specific_filter[0])!==-1);
+    current_day_data = event_specific_filter[0]==""? current_day_data : current_day_data.filter((el)=>el.region.indexOf(event_specific_filter[1])!==-1);
+    current_day_data = event_specific_filter[0]==""? current_day_data : current_day_data.filter((el)=>el.organizator_type.indexOf(event_specific_filter[2])!==-1);
+    for (let i=0; i< current_day_data.length; i+=1) {
+        const text = document.createElement('span');
+        text.innerHTML = `• ${current_day_data[i].time_start} - ${current_day_data[i].time_end} ${current_day_data[i].city} ${current_day_data[i].place}. <p>"${current_day_data[i].title}"</p>`    
+        document.getElementById('plans').appendChild(text);
+    }
+    
 }
 
 function minusYear() {
     let year = Number(document.getElementById('current_year').innerText) - 1
     let month = months.indexOf(document.getElementById('current_month').innerText)
     document.getElementById('current_year').innerText = year;
-    buildCalendar(year, month, show_date_info);
+    buildCalendar(year, month, show_date_info, event_filter[0],event_specific_filter);
 }
 function plusYear() {
     let year = Number(document.getElementById('current_year').innerText) + 1
     let month = months.indexOf(document.getElementById('current_month').innerText)
     document.getElementById('current_year').innerText = year;
-    buildCalendar(year, month, show_date_info);
+    buildCalendar(year, month, show_date_info, event_filter[0],event_specific_filter);
 }
 function minusMonth() {
     let month = months.indexOf(document.getElementById('current_month').innerText)>0? months.indexOf(document.getElementById('current_month').innerText) - 1 : 11;
     let year = months.indexOf(document.getElementById('current_month').innerText)>0? Number(document.getElementById('current_year').innerText): Number(document.getElementById('current_year').innerText) - 1;
     document.getElementById('current_month').innerText = month;
     document.getElementById('current_year').innerText = year;
-    buildCalendar(year, month, show_date_info);
+    buildCalendar(year, month, show_date_info, event_filter[0],event_specific_filter);
 }
 function plusMonth() {
     let month = months.indexOf(document.getElementById('current_month').innerText)<11? months.indexOf(document.getElementById('current_month').innerText) + 1 : 0;
     let year = months.indexOf(document.getElementById('current_month').innerText)<11? Number(document.getElementById('current_year').innerText): Number(document.getElementById('current_year').innerText) + 1;
     document.getElementById('current_month').innerText = month;
     document.getElementById('current_year').innerText = year;
-    buildCalendar(year, month, show_date_info);
+    buildCalendar(year, month, show_date_info, event_filter[0],event_specific_filter);
 }
 
 const areas = document.querySelectorAll('analyzers_box');
@@ -182,34 +221,40 @@ document.getElementById('conferences').addEventListener('click', showConferences
 document.getElementById('events').addEventListener('click', showEvents)
 document.getElementById('online_events').addEventListener('click', showOnlineEvents)
 function showConferences() {
-    document.getElementById('calendar_buttons').classList = 'calendar_buttons';
-    document.getElementById('calendar_box').classList.remove('calendar_background_dark');
-    document.getElementById('calendar_box').classList.add('calendar_background_light');    
-    document.getElementById('calendar_filters').classList.remove('hide');
-    document.getElementById('calendar_data').classList.remove('hide');
-    document.getElementById('conferences').classList.add('selected_card')
-    document.getElementById('events').classList.remove('selected_card')
-    document.getElementById('online_events').classList.remove('selected_card')
+    if (document.getElementById('conferences').classList == 'card selected_card'){
+        document.getElementById('conferences').classList.remove('selected_card');
+        event_filter=[0];
+    } else { 
+        document.getElementById('conferences').classList.add('selected_card')
+        document.getElementById('events').classList.remove('selected_card')
+        document.getElementById('online_events').classList.remove('selected_card')
+        event_filter=[1];
+    }
+    buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);
 }
 function showEvents() {
-    document.getElementById('calendar_buttons').classList = 'calendar_buttons';
-    document.getElementById('calendar_box').classList.remove('calendar_background_dark');
-    document.getElementById('calendar_box').classList.add('calendar_background_light');  
-    document.getElementById('calendar_filters').classList.remove('hide');
-    document.getElementById('calendar_data').classList.remove('hide');
-    document.getElementById('conferences').classList.remove('selected_card')
-    document.getElementById('events').classList.add('selected_card')
-    document.getElementById('online_events').classList.remove('selected_card')
+    if (document.getElementById('events').classList == 'card selected_card'){
+        document.getElementById('events').classList.remove('selected_card')
+        event_filter=[0];
+    } else {
+        document.getElementById('conferences').classList.remove('selected_card')
+        document.getElementById('events').classList.add('selected_card')
+        document.getElementById('online_events').classList.remove('selected_card')
+        event_filter=[2];
+    }
+    buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);
 }
 function showOnlineEvents() {
-    document.getElementById('calendar_buttons').classList = 'calendar_buttons';
-    document.getElementById('calendar_box').classList.remove('calendar_background_dark');
-    document.getElementById('calendar_box').classList.add('calendar_background_light');  
-    document.getElementById('calendar_filters').classList.remove('hide');
-    document.getElementById('calendar_data').classList.remove('hide');
-    document.getElementById('conferences').classList.remove('selected_card')
-    document.getElementById('events').classList.remove('selected_card')
-    document.getElementById('online_events').classList.add('selected_card')
+    if (document.getElementById('online_events').classList == 'card selected_card'){
+        document.getElementById('online_events').classList.remove('selected_card')
+        event_filter=[0];
+    } else {
+        document.getElementById('conferences').classList.remove('selected_card')
+        document.getElementById('events').classList.remove('selected_card')
+        document.getElementById('online_events').classList.add('selected_card')
+        event_filter=[3];
+    }
+    buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);
 }
 
 document.getElementById('forum').addEventListener('click',showForum);
@@ -231,4 +276,29 @@ document.getElementById('forum_0_1').addEventListener('click',showForumTopic)
 function showForumTopic() {
     document.getElementById('forum_list').classList.add('hide');
     document.getElementById('current_topic').classList.remove('hide');
+}
+
+function buildFutureEvents() {
+    document.getElementById('all_events').innerHTML = '';
+    let filter = event_filter == 1? "Конференция" : event_filter == 2 ? "Экскурсия" : "Онлайн";
+    let year = Number(document.getElementById('current_year').innerText)
+    let month = months.indexOf(document.getElementById('current_month').innerText)
+    let current_day_data = Number(event_filter)>0? event_data.filter((el)=>Number(el.date_start.split('.')[0]) >= new Date().getDate() && Number(el.date_start.split('.')[1]) - 1 == month && Number(el.date_start.split('.')[2]) == year && el.type==filter):event_data.filter((el)=>Number(el.date_start.split('.')[0]) >= new Date().getDate() && Number(el.date_start.split('.')[1]) - 1 == month && Number(el.date_start.split('.')[2]) == year);
+    current_day_data = event_specific_filter[0]==""? current_day_data : current_day_data.filter((el)=>el.specialization.indexOf(event_specific_filter[0])!==-1);
+    current_day_data = event_specific_filter[1]==""? current_day_data : current_day_data.filter((el)=>el.region.indexOf(event_specific_filter[1])!==-1);
+    current_day_data = event_specific_filter[2]==""? current_day_data : current_day_data.filter((el)=>el.organizator_type.indexOf(event_specific_filter[2])!==-1);
+    for (let i=0; i<current_day_data.length; i+=1) {
+        let card = document.createElement('div');
+        card.classList = 'event_item';
+        card.innerHTML = `<div class="event_item_info">
+                            <div class="event_item_date">${current_day_data[i].date_start}</div>
+                            <div class="event_item_city">${current_day_data[i].city}</div>
+                        </div>
+                        <div class="event_item_title">${current_day_data[i].title}</div>
+                        <div class="event_item_type">${current_day_data[i].type}</div>
+                        <div class="event_item_category">${current_day_data[i].specialization}</div>
+                        <div class="event_item_location">${current_day_data[i].place}</div>
+                        <div class="event_item_time">${current_day_data[i].time_start} - ${current_day_data[i].time_end}</div>`
+        document.getElementById('all_events').append(card)
+    }
 }

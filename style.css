@@ -541,3 +541,8 @@
 .disabled {
     pointer-events: none;
 }
+
+.eventable {
+    content: "*";
+    background-color: rgb(81, 226, 125);
+}
