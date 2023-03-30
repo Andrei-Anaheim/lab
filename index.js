@@ -8,6 +8,8 @@ if (localStorage.getItem('user_labinfo')) {
 document.getElementById('login').addEventListener('click',openSignPopup);
 function openSignPopup() {
     document.getElementById('popup_sigh').classList.remove('hide');
+    document.getElementById('login_popup').value = '';
+    document.getElementById('password_popup').value = '';
 }
 document.getElementById('approve_sigh').addEventListener('click', CheckSighIn);
 function CheckSighIn() {
@@ -21,6 +23,12 @@ function CheckSighIn() {
         document.getElementById('user').classList.remove('hide');
     }
 }
+document.getElementById('user').addEventListener('click', ()=>{
+        document.getElementById('user').innerText = '';
+        document.getElementById('login').classList.remove('hide');
+        document.getElementById('user').classList.add('hide');
+        localStorage.removeItem('user_labinfo');
+})
 
 window.onload = getEventsData();
 let event_data = [];
@@ -29,7 +37,6 @@ function getEventsData() {
     .then(res => res.json())
     .then(data => {
         event_data = Array.from(data)
-        console.log(event_data);
     })
 }
 let event_filter = [0];
@@ -148,7 +155,6 @@ function buildCalendar(year, month, date_info, event_filter, event_specific_filt
     let current_filter_event_data = event_specific_filter[0]==""? inter_event_data : inter_event_data.filter((el)=>el.specialization.indexOf(event_specific_filter[0])!==-1);
     current_filter_event_data = event_specific_filter[1]==""? current_filter_event_data : current_filter_event_data.filter((el)=>el.region.indexOf(event_specific_filter[1])!==-1);
     current_filter_event_data = event_specific_filter[2]==""? current_filter_event_data : current_filter_event_data.filter((el)=>el.organizator_type.indexOf(event_specific_filter[2])!==-1);
-    console.log(current_filter_event_data, event_specific_filter[0]);
     for (let i=1; i<=days_in_month; i+=1) {
         document.getElementById('calendar_table').getElementsByTagName('td')[5+(start_day==0?7:start_day)+i].classList.remove('eventable');
         document.getElementById('calendar_table').getElementsByTagName('td')[5+(start_day==0?7:start_day)+i].innerText = i
@@ -302,3 +308,15 @@ function buildFutureEvents() {
         document.getElementById('all_events').append(card)
     }
 }
+
+document.getElementById('home').addEventListener('click', openHome);
+function openHome() {
+    let menu_items = document.getElementById('menu_nav').children;
+    let main = document.querySelectorAll('.main');
+    for (let i=0; i<menu_items.length; i+=1) {
+        if(main[i]) main[i].classList.add('hide');
+        menu_items[i].classList = 'menu_item';
+    }
+}
+
+document.getElementById('learn_home').addEventListener('click', ()=>{document.getElementById("section_2").scrollIntoView();});
