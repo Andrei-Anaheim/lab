@@ -48,6 +48,7 @@ document.getElementById('commercial_select').addEventListener('change',()=>{even
 document.getElementById('menu_nav').addEventListener('click',(e)=>{changeMenuPage(e)})
 function changeMenuPage(e) {
     e.preventDefault();
+    document.getElementById('home').classList.add('hide');
     if (e.target.classList.contains('menu_item')) {
         let menu_items = document.getElementById('menu_nav').children;
         let main = document.querySelectorAll('.main');
@@ -311,6 +312,7 @@ function buildFutureEvents() {
 
 document.getElementById('home').addEventListener('click', openHome);
 function openHome() {
+    document.getElementById('home').classList.remove('hide')
     let menu_items = document.getElementById('menu_nav').children;
     let main = document.querySelectorAll('.main');
     for (let i=0; i<menu_items.length; i+=1) {
