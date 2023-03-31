@@ -10,9 +10,9 @@
 <body>
     <header class="header">
         <div class="header_left">
-            <img class="logo" src="./logo.png" alt="logo">
+            <img class="logo" src="./logo.png" alt="logo" id="home">
             <div class="menu_nav" id="menu_nav">
-                <div class="menu_item active" id="menu_item_1">Новости</div>
+                <div class="menu_item" id="menu_item_1">Новости</div>
                 <div class="menu_item" id="menu_item_2">Энциклопедия</div>
                 <div class="menu_item" id="menu_item_3">Календарь</div>
                 <div class="menu_item" id="menu_item_4">Биржа труда</div>
@@ -26,8 +26,95 @@
             <div class="login" id="login">Войти</div>
         </div>
     </header>
+    <div class="home">
+        <div class="section_1" id="section_1">
+            <div class="section_1_content">
+                <div class="section_title">Всё о медицине</div>
+                <div class="section_subtitle">Для врачей и не только</div>
+                <div class="learn_button" id="learn_home">УЗНАТЬ БОЛЬШЕ</div>
+            </div>
+        </div>
+        <div class="section_2" id="section_2">
+            <div class="section_2_content">
+                <div class="section_2_title">Наши сервисы</div>
+                <div class="section_2_cards">
+                    <div class="section_2_item">
+                        <div class="galka">✓</div>
+                        <div class="section_subtitle">Консультация</div>
+                        <div class="section_subsubtitle">Задайте вопрос и получите ответ</div>
+                        <div class="section_details_title">Подробнее →</div>
+                    </div>
+                    <div class="section_2_item">
+                        <div class="galka">✓</div>
+                        <div class="section_subtitle">Новости</div>
+                        <div class="section_subsubtitle">О медицине, биологии и фармакологии</div>
+                        <div class="section_details_title">Подробнее →</div>
+                    </div>
+                    <div class="section_2_item">
+                        <div class="galka">✓</div>
+                        <div class="section_subtitle">Биржа труда</div>
+                        <div class="section_subsubtitle">Найдите сотрудника или работу</div>
+                        <div class="section_details_title">Подробнее →</div>
+                    </div>
+                    <div class="section_2_item">
+                        <div class="galka">✓</div>
+                        <div class="section_subtitle">События</div>
+                        <div class="section_subsubtitle">Мероприятия, встречи, вебинары</div>
+                        <div class="section_details_title">Подробнее →</div>
+                    </div>
+                    <div class="section_2_item">
+                        <div class="galka">✓</div>
+                        <div class="section_subtitle">Ресурсы</div>
+                        <div class="section_subsubtitle">Полезные ссылки, статьи, информация</div>
+                        <div class="section_details_title">Подробнее →</div>
+                    </div>
+                    <div class="section_2_item">
+                        <div class="galka">✓</div>
+                        <div class="section_subtitle">Развлечения</div>
+                        <div class="section_subsubtitle">Отдых от рутины</div>
+                        <div class="section_details_title">Подробнее →</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section_3" id="section_3">
+            <div class="section_3_content">
+                <div class="section_2_title">Наша платформа</div>
+                <div class="section_subsubtitle">Здорово – это платформа, созданная командой профессионалов, которые работают в сфере здравоохранения больше 10 лет.
+                    Наша цель: объединить всех людей, которые заботятся о здоровье жителей нашей страны.
+                    Здесь Вы можете спросить, узнать, найти, услышать и прочитать всё о медицине!
+                </div>
+            </div>
+        </div>
+        <div class="section_2" id="section_2">
+            <div class="section_2_content">
+                <div class="section_2_title">Эксперты, с которыми мы работаем</div>
+                <div class="section_2_cards">
+                    <div class="section_4_item">
+                        <div class="expert_photo">Фото 1</div>
+                        <div class="section_subsubtitle">Иванов<br/>Андрей Михайлович</div>
+                        <div class="section_text_small">Член-корреспондент РАН<br/>Профессор<br/>Доктор медицинских наук</div>
+                        <div class="section_details_title">Подробнее →</div>
+                    </div>
+                    <div class="section_4_item">
+                        <div class="expert_photo">Фото 2</div>
+                        <div class="section_subsubtitle">Шмидт<br/>Инна Олеговна</div>
+                        <div class="section_text_small">Заведующая КДЛ СПБ ГБУЗ "Клиническая больница Святителя Луки"</div>
+                        <div class="section_details_title">Подробнее →</div>
+                    </div>
+                    <div class="section_4_item">
+                        <div class="expert_photo">Фото 3</div>
+                        <div class="section_subsubtitle">Ковальчук<br/>Юрий Павлович</div>
+                        <div class="section_text_small">Заместитель главного врача по лабораторной диагностике ПСПбГМУ им. И.П.Павлова</div>
+                        <div class="section_details_title">Подробнее →</div>
+                    </div>
+                </div>
+                <div class="button centered">Показать всех экспертов</div>
+            </div>
+        </div>
+    </div>
     <main>
-        <div class="news_box main">
+        <div class="news_box main hide">
             <div class="buttons_nav" id="news_box_buttons_nav">
                 <div class="buttons" id="news_buttons_start"><<</div>
                 <div class="buttons" id="news_buttons_left"><</div>
@@ -120,7 +207,7 @@
                 </div>
             </div>
         </div>
-        <div class="wiki_box main"></div>
+        <div class="wiki_box main hide"></div>
         <div class="calendar_box calendar_background_light main hide" id="calendar_box">
             <div class="calendar_buttons" id="calendar_buttons">
                 <div class="card" id="conferences">
@@ -223,153 +310,9 @@
                 </div>
             </div>
             <h2 class="centered">Ближайшие мероприятия</h2>
-            <div class="all_events hide" id="all_events">
-                <!-- <div class="event_item">
-                    <div class="event_item_info">
-                        <div class="event_item_date">01.03.2023</div>
-                        <div class="event_item_city">Санкт-Петербург</div>
-                    </div>
-                    <div class="event_item_title">"Тяготы и невзгоды врачей-акушеров"</div>
-                    <div class="event_item_type">Конференция</div>
-                    <div class="event_item_category">Акушерство и гинекология</div>
-                    <div class="event_item_location">Гостиница "Санкт-Петербург"</div>
-                    <div class="event_item_time">10.00-17.00</div>
-                </div>
-                <div class="event_item">
-                    <div class="event_item_info">
-                        <div class="event_item_date">14-15.03.2023</div>
-                        <div class="event_item_city">Воронеж</div>
-                    </div>
-                    <div class="event_item_title">"Здоровье женщины — здоровье нации"</div>
-                    <div class="event_item_type">Конференция</div>
-                    <div class="event_item_category">Акушерство и гинекология</div>
-                    <div class="event_item_location">Отель "Benefit Plaza"</div>
-                    <div class="event_item_time">10.00-17.00</div>
-                </div>
-                <div class="event_item">
-                    <div class="event_item_info">
-                        <div class="event_item_date">16-18.03.2023</div>
-                        <div class="event_item_city">Москва</div>
-                    </div>
-                    <div class="event_item_title">"Репродуктивный потенциал России: весенние контраверсии"</div>
-                    <div class="event_item_type">Конференция</div>
-                    <div class="event_item_category">Акушерство и гинекология</div>
-                    <div class="event_item_location">Отель "Рэдиссон Славянская"</div>
-                    <div class="event_item_time">10.00-17.00</div>
-                </div>
-                <div class="event_item">
-                    <div class="event_item_info">
-                        <div class="event_item_date">01.03.2023</div>
-                        <div class="event_item_city">Санкт-Петербург</div>
-                    </div>
-                    <div class="event_item_title">"Тяготы и невзгоды врачей-акушеров"</div>
-                    <div class="event_item_type">Конференция</div>
-                    <div class="event_item_category">Акушерство и гинекология</div>
-                    <div class="event_item_location">Гостиница "Санкт-Петербург"</div>
-                    <div class="event_item_time">10.00-17.00</div>
-                </div>
-                <div class="event_item">
-                    <div class="event_item_info">
-                        <div class="event_item_date">14-15.03.2023</div>
-                        <div class="event_item_city">Воронеж</div>
-                    </div>
-                    <div class="event_item_title">"Здоровье женщины — здоровье нации"</div>
-                    <div class="event_item_type">Конференция</div>
-                    <div class="event_item_category">Акушерство и гинекология</div>
-                    <div class="event_item_location">Отель "Benefit Plaza"</div>
-                    <div class="event_item_time">10.00-17.00</div>
-                </div>
-                <div class="event_item">
-                    <div class="event_item_info">
-                        <div class="event_item_date">16-18.03.2023</div>
-                        <div class="event_item_city">Москва</div>
-                    </div>
-                    <div class="event_item_title">"Репродуктивный потенциал России: весенние контраверсии"</div>
-                    <div class="event_item_type">Конференция</div>
-                    <div class="event_item_category">Акушерство и гинекология</div>
-                    <div class="event_item_location">Отель "Рэдиссон Славянская"</div>
-                    <div class="event_item_time">10.00-17.00</div>
-                </div>
-                <div class="event_item">
-                    <div class="event_item_info">
-                        <div class="event_item_date">01.03.2023</div>
-                        <div class="event_item_city">Санкт-Петербург</div>
-                    </div>
-                    <div class="event_item_title">"Тяготы и невзгоды врачей-акушеров"</div>
-                    <div class="event_item_type">Конференция</div>
-                    <div class="event_item_category">Акушерство и гинекология</div>
-                    <div class="event_item_location">Гостиница "Санкт-Петербург"</div>
-                    <div class="event_item_time">10.00-17.00</div>
-                </div>
-                <div class="event_item">
-                    <div class="event_item_info">
-                        <div class="event_item_date">14-15.03.2023</div>
-                        <div class="event_item_city">Воронеж</div>
-                    </div>
-                    <div class="event_item_title">"Здоровье женщины — здоровье нации"</div>
-                    <div class="event_item_type">Конференция</div>
-                    <div class="event_item_category">Акушерство и гинекология</div>
-                    <div class="event_item_location">Отель "Benefit Plaza"</div>
-                    <div class="event_item_time">10.00-17.00</div>
-                </div>
-                <div class="event_item">
-                    <div class="event_item_info">
-                        <div class="event_item_date">16-18.03.2023</div>
-                        <div class="event_item_city">Москва</div>
-                    </div>
-                    <div class="event_item_title">"Репродуктивный потенциал России: весенние контраверсии"</div>
-                    <div class="event_item_type">Конференция</div>
-                    <div class="event_item_category">Акушерство и гинекология</div>
-                    <div class="event_item_location">Отель "Рэдиссон Славянская"</div>
-                    <div class="event_item_time">10.00-17.00</div>
-                </div> -->
-            </div>
+            <div class="all_events hide" id="all_events"></div>
         </div>
         <div class="vacancy_box main"></div>
-        <!-- <div class="instruments_box main hide">
-            <div class="analyzers_box hide" id="analyzers_box">
-                <div class="analyzers" id="biochemistry">Биохимические анализаторы</div>
-                <div class="analyzers" id="immunochemistry">Иммунохимические анализаторы</div>
-                <div class="analyzers" id="hemotology">Гематологические анализаторы</div>
-                <div class="analyzers">Анализаторы мочи</div>
-                <div class="analyzers">Автоматизация</div>
-                <div class="analyzers">Микробиологические анализаторы</div>
-                <div class="analyzers">Научное оборудование</div>
-                <div class="analyzers">Прочее</div>
-            </div>
-            <div class="analyzers_area_box hide" id="areas_1">
-                <div class="analyzers">Beckman Coulter</div>
-                <div class="analyzers">Roche</div>
-                <div class="analyzers">Siemens</div>
-                <div class="analyzers">Abbott</div>
-                <div class="analyzers">Mindrey</div>
-                <div class="analyzers">BioSystems</div>
-            </div>
-            <div class="analyzers_area_box hide" id="areas_2">
-                <div class="analyzers">Beckman Coulter</div>
-                <div class="analyzers">Roche</div>
-                <div class="analyzers">Siemens</div>
-                <div class="analyzers">Abbott</div>
-                <div class="analyzers">Mindrey</div>
-                <div class="analyzers">Human</div>
-            </div>
-            <div class="analyzers_area_box hide" id="areas_3">
-                <div class="analyzers">Beckman Coulter</div>
-                <div class="analyzers">Sysmex</div>
-                <div class="analyzers">Siemens</div>
-                <div class="analyzers">Abbott</div>
-                <div class="analyzers">Mindrey</div>
-                <div class="analyzers">Nihon Coden</div>
-            </div>
-            <div class="analyzers_area_box hide" id="areas_4">
-                <div class="analyzers">Beckman Coulter</div>
-                <div class="analyzers">Arkray</div>
-                <div class="analyzers">Siemens</div>
-                <div class="analyzers">Dirui</div>
-                <div class="analyzers">Mindrey</div>
-                <div class="analyzers">77 Elektronika</div>
-            </div> 
-        </div> -->
         <div class="questions_box questions_bkg main hide">
             <div class="calendar_buttons_big" id="question_buttons">
                 <div class="card" id="forum">
