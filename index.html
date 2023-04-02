@@ -13,11 +13,11 @@
             <img class="logo" src="./logo.png" alt="logo" id="home">
             <div class="menu_nav" id="menu_nav">
                 <div class="menu_item" id="menu_item_1">Новости</div>
-                <div class="menu_item" id="menu_item_2">Энциклопедия</div>
+                <div class="menu_item" id="menu_item_2">Консультация</div>
                 <div class="menu_item" id="menu_item_3">Календарь</div>
-                <div class="menu_item" id="menu_item_4">Биржа труда</div>
+                <div class="menu_item" id="menu_item_4">Клинические случаи</div>
+                <div class="menu_item" id="menu_item_5">Биржа труда</div>
                 <!-- <div class="menu_item" id="menu_item_5">Лабораторное оборудование</div> -->
-                <div class="menu_item" id="menu_item_5">Консультация</div>
                 <div class="menu_item" id="menu_item_6">Развлечения</div>
             </div>
         </div>
@@ -26,7 +26,7 @@
             <div class="login" id="login">Войти</div>
         </div>
     </header>
-    <div class="home">
+    <div class="home" id="home_section">
         <div class="section_1" id="section_1">
             <div class="section_1_content">
                 <div class="section_title">Всё о медицине</div>
@@ -38,41 +38,83 @@
             <div class="section_2_content">
                 <div class="section_2_title">Наши сервисы</div>
                 <div class="section_2_cards">
-                    <div class="section_2_item">
-                        <div class="galka">✓</div>
-                        <div class="section_subtitle">Консультация</div>
-                        <div class="section_subsubtitle">Задайте вопрос и получите ответ</div>
-                        <div class="section_details_title">Подробнее →</div>
+                    <div class="section_2_card" id="news_card">
+                        <div class="card_2_front">
+                            <div class="galka">✓</div>
+                            <div class="section_subtitle">Новости</div>
+                            <div class="section_subsubtitle">О медицине, биологии и фармакологии</div>
+                            <div class="section_details_title">Подробнее →</div>
+                        </div>
+                        <div class="card_2_back">
+                            <div class="galka doctor1"></div>
+                            <span>Узнавайте последние новости медицины первыми, будьте всегда в курсе событий</span>
+                            <p class="details">Открыть ленту новостей</p>
+                        </div>
                     </div>
-                    <div class="section_2_item">
-                        <div class="galka">✓</div>
-                        <div class="section_subtitle">Новости</div>
-                        <div class="section_subsubtitle">О медицине, биологии и фармакологии</div>
-                        <div class="section_details_title">Подробнее →</div>
+                    <div class="section_2_card" id="forum_card">
+                        <div class="card_2_front">
+                            <div class="galka">✓</div>
+                            <div class="section_subtitle">Консультация</div>
+                            <div class="section_subsubtitle">Задайте вопрос и получите ответ</div>
+                            <div class="section_details_title">Подробнее →</div>
+                        </div>
+                        <div class="card_2_back">
+                            <div class="galka doctor2"></div>
+                            <span>Задайте вопрос неравнодушным коллегам на форуме или же получите консультацию наших экспертов. </span>
+                            <p class="details">Открыть форум</p>
+                        </div>
                     </div>
-                    <div class="section_2_item">
-                        <div class="galka">✓</div>
-                        <div class="section_subtitle">Биржа труда</div>
-                        <div class="section_subsubtitle">Найдите сотрудника или работу</div>
-                        <div class="section_details_title">Подробнее →</div>
+                    <div class="section_2_card" id="calendar_card">
+                        <div class="card_2_front">
+                            <div class="galka">✓</div>
+                            <div class="section_subtitle">События</div>
+                            <div class="section_subsubtitle">Мероприятия, встречи, вебинары</div>
+                            <div class="section_details_title">Подробнее →</div>
+                        </div>
+                        <div class="card_2_back">
+                            <div class="galka doctor3"></div>
+                            <span>Узнавайте расписание ближайших научных мероприятий по интересующим Вас темам</span>
+                            <p class="details">Открыть календарь событий</p>
+                        </div>
                     </div>
-                    <div class="section_2_item">
-                        <div class="galka">✓</div>
-                        <div class="section_subtitle">События</div>
-                        <div class="section_subsubtitle">Мероприятия, встречи, вебинары</div>
-                        <div class="section_details_title">Подробнее →</div>
+                    <div class="section_2_card" id="cases_card">
+                        <div class="card_2_front">
+                            <div class="galka">✓</div>
+                            <div class="section_subtitle">Клинические случаи</div>
+                            <div class="section_subsubtitle">База типичных патологий</div>
+                            <div class="section_details_title">Подробнее →</div>
+                        </div>
+                        <div class="card_2_back">
+                            <div class="galka doctor4"></div>
+                            <span>Изучайте характерные клинические картины распространенных заболеваний</span>
+                            <p class="details">Открыть базу клинических случаев</p>
+                        </div>
                     </div>
-                    <div class="section_2_item">
-                        <div class="galka">✓</div>
-                        <div class="section_subtitle">Ресурсы</div>
-                        <div class="section_subsubtitle">Полезные ссылки, статьи, информация</div>
-                        <div class="section_details_title">Подробнее →</div>
+                    <div class="section_2_card" id="vacancy_card">
+                        <div class="card_2_front">
+                            <div class="galka">✓</div>
+                            <div class="section_subtitle">Биржа труда</div>
+                            <div class="section_subsubtitle">Найдите сотрудника или работу</div>
+                            <div class="section_details_title">Подробнее →</div>
+                        </div>
+                        <div class="card_2_back">
+                            <div class="galka doctor5"></div>
+                            <span>Ищите вакансии или же находите сотрудников по широкому списку критериев</span>
+                            <p class="details">Открыть биржу труда</p>
+                        </div>
                     </div>
-                    <div class="section_2_item">
-                        <div class="galka">✓</div>
-                        <div class="section_subtitle">Развлечения</div>
-                        <div class="section_subsubtitle">Отдых от рутины</div>
-                        <div class="section_details_title">Подробнее →</div>
+                    <div class="section_2_card" id="games_card">
+                        <div class="card_2_front">
+                            <div class="galka">✓</div>
+                            <div class="section_subtitle">Развлечения</div>
+                            <div class="section_subsubtitle">Отдых от рутины</div>
+                            <div class="section_details_title">Подробнее →</div>
+                        </div>
+                        <div class="card_2_back">
+                            <div class="galka doctor6"></div>
+                            <span>Изучайте медицину в игровой манере, совершенствуйте свои навыки, соревнуйтесь с коллегами</span>
+                            <p class="details">Открыть развлечения</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,9 +122,9 @@
         <div class="section_3" id="section_3">
             <div class="section_3_content">
                 <div class="section_2_title">Наша платформа</div>
-                <div class="section_subsubtitle">Здорово – это платформа, созданная командой профессионалов, которые работают в сфере здравоохранения больше 10 лет.
-                    Наша цель: объединить всех людей, которые заботятся о здоровье жителей нашей страны.
-                    Здесь Вы можете спросить, узнать, найти, услышать и прочитать всё о медицине!
+                <div class="section_subsubtitle">MedBook – это платформа, которая объединяет специалистов в области медицины всей страны. 
+                    Создана профессионалами с многолетним опытом в сфере здравоохранения. Наша команда работает для того, чтобы Вы развивались.
+                    В MedBook Вы можете спросить, узнать, найти, услышать и прочитать все о медицине.
                 </div>
             </div>
         </div>
@@ -207,112 +249,6 @@
                 </div>
             </div>
         </div>
-        <div class="wiki_box main hide"></div>
-        <div class="calendar_box calendar_background_light main hide" id="calendar_box">
-            <div class="calendar_buttons" id="calendar_buttons">
-                <div class="card" id="conferences">
-                    <div class="card__front"><p>Конференции, выставки</p></div>
-                    <div class="card__back"><span>Календарь научных конференций, выставок, семинаров, круглых столов</span><p class="details">Подробнее</p></div>
-                </div>
-                <div class="card" id="events">
-                    <div class="card__front"><p>Экскурсии в ЛПУ</p></div>
-                    <div class="card__back"><span>Календарь экскурсий в ЛПУ для просмотра оборудования и организации работы</span><p class="details">Подробнее</p></div>
-                </div>
-                <div class="card" id="online_events">
-                    <div class="card__front"><p>Онлайн-мероприятия</p></div>
-                    <div class="card__back"><span>Календарь онлайн-мероприятий: лекции, вебинары, онлайн-конференции, выставки</span><p class="details">Подробнее</p></div>
-                </div>
-                <div class="card" id="unformal_events">
-                    <div class="card__front"><p>Неформальные встречи</p></div>
-                    <div class="card__back"><span>Я не знаю зачем это, но Вадим просил оставить :)</span><p class="details">Подробнее</p></div>
-                </div>
-            </div>
-            <div class="calendar_filters hide" id="calendar_filters">
-                <select class="calendar_filters_item" id="specialisation_select">
-                    <option>Фильтр по специальности</option>
-                    <option>Авиационная и космическая медицина</option>
-                    <option>Акушерство и гинекология</option>
-                    <option>Аллергология и иммунология</option>
-                    <option>Анестезиология и реаниматология</option>
-                    <option>Бактериология</option>
-                    <option>Вирусология</option>
-                    <option>Водолазная медицина</option>
-                    <option>Гастроэнтерология</option>
-                    <option>Гематология</option>
-                    <option>Генетика</option>
-                    <option>Гериатрия</option>
-                    <option>Гигиена и санитария</option>
-                    <option>Гистология</option>
-                    <option>Дезинфектология</option>
-                    <option>Дерматовенерология</option>
-                    <option>Детская кардиология</option>
-                    <option>Эпидемиология</option>
-                    <option>и т.д.</option>
-                </select>
-                <select class="calendar_filters_item" id="city_select">
-                    <option>Фильтр по региону</option>
-                    <option>Центральный ФО</option>
-                    <option>Северо-Западный ФО</option>
-                    <option>Южный ФО</option>
-                    <option>Северо-Кавказский ФО</option>
-                    <option>Приволжский ФО</option>
-                    <option>Уральский ФО</option>
-                    <option>Сибирский ФО</option>
-                    <option>Дальневосточный ФО</option>
-                </select>
-                <select class="calendar_filters_item" id="commercial_select">
-                    <option>Фильтр по организатору</option>
-                    <option>Государственный</option>
-                    <option>Коммерческий</option>
-                </select>
-            </div>
-            <div class="calendar_data hide" id="calendar_data">
-                <div class="calendar">
-                    <div class="year">
-                        <div class="clickable" id="year_left" onclick="minusYear()"><</div>
-                        <div id="current_year">2019</div>
-                        <div class="clickable" id="year_right" onclick="plusYear()">></div>
-                    </div>
-                    <div class="month">
-                        <div class="clickable" id="month_left" onclick="minusMonth()"><</div>
-                        <div id="current_month">Март</div>
-                        <div class="clickable" id="month_right" onclick="plusMonth()">></div>
-                    </div>
-                    <table class="calendar_table" id="calendar_table">
-                        <tbody>
-                            <tr class="super_row">
-                                <td>Пн</td><td>Вт</td><td>Ср</td><td>Чт</td><td>Пт</td><td>Сб</td><td>Вс</td>
-                            </tr>
-                            <tr class="casual_row">
-                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="casual_row">
-                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="casual_row">
-                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="casual_row">
-                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="casual_row">
-                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="casual_row">
-                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                </div>
-                <div class="plans" id="plans">
-                    <div class="plans_date" id="date_of_interest"></div>
-                </div>
-            </div>
-            <h2 class="centered">Ближайшие мероприятия</h2>
-            <div class="all_events hide" id="all_events"></div>
-        </div>
-        <div class="vacancy_box main"></div>
         <div class="questions_box questions_bkg main hide">
             <div class="calendar_buttons_big" id="question_buttons">
                 <div class="card" id="forum">
@@ -462,7 +398,113 @@
                 </div>
             </div>
         </div>
-        <div class="games_box main"></div>
+        <div class="calendar_box calendar_background_light main hide" id="calendar_box">
+            <div class="calendar_buttons" id="calendar_buttons">
+                <div class="card" id="conferences">
+                    <div class="card__front"><p>Конференции, выставки</p></div>
+                    <div class="card__back"><span>Календарь научных конференций, выставок, семинаров, круглых столов</span><p class="details">Подробнее</p></div>
+                </div>
+                <div class="card" id="events">
+                    <div class="card__front"><p>Экскурсии в ЛПУ</p></div>
+                    <div class="card__back"><span>Календарь экскурсий в ЛПУ для просмотра оборудования и организации работы</span><p class="details">Подробнее</p></div>
+                </div>
+                <div class="card" id="online_events">
+                    <div class="card__front"><p>Онлайн-мероприятия</p></div>
+                    <div class="card__back"><span>Календарь онлайн-мероприятий: лекции, вебинары, онлайн-конференции, выставки</span><p class="details">Подробнее</p></div>
+                </div>
+                <div class="card" id="unformal_events">
+                    <div class="card__front"><p>Неформальные встречи</p></div>
+                    <div class="card__back"><span>Я не знаю зачем это, но Вадим просил оставить :)</span><p class="details">Подробнее</p></div>
+                </div>
+            </div>
+            <div class="calendar_filters hide" id="calendar_filters">
+                <select class="calendar_filters_item" id="specialisation_select">
+                    <option>Фильтр по специальности</option>
+                    <option>Авиационная и космическая медицина</option>
+                    <option>Акушерство и гинекология</option>
+                    <option>Аллергология и иммунология</option>
+                    <option>Анестезиология и реаниматология</option>
+                    <option>Бактериология</option>
+                    <option>Вирусология</option>
+                    <option>Водолазная медицина</option>
+                    <option>Гастроэнтерология</option>
+                    <option>Гематология</option>
+                    <option>Генетика</option>
+                    <option>Гериатрия</option>
+                    <option>Гигиена и санитария</option>
+                    <option>Гистология</option>
+                    <option>Дезинфектология</option>
+                    <option>Дерматовенерология</option>
+                    <option>Детская кардиология</option>
+                    <option>Эпидемиология</option>
+                    <option>и т.д.</option>
+                </select>
+                <select class="calendar_filters_item" id="city_select">
+                    <option>Фильтр по региону</option>
+                    <option>Центральный ФО</option>
+                    <option>Северо-Западный ФО</option>
+                    <option>Южный ФО</option>
+                    <option>Северо-Кавказский ФО</option>
+                    <option>Приволжский ФО</option>
+                    <option>Уральский ФО</option>
+                    <option>Сибирский ФО</option>
+                    <option>Дальневосточный ФО</option>
+                </select>
+                <select class="calendar_filters_item" id="commercial_select">
+                    <option>Фильтр по организатору</option>
+                    <option>Государственный</option>
+                    <option>Коммерческий</option>
+                </select>
+            </div>
+            <div class="calendar_data hide" id="calendar_data">
+                <div class="calendar">
+                    <div class="year">
+                        <div class="clickable" id="year_left" onclick="minusYear()"><</div>
+                        <div id="current_year">2019</div>
+                        <div class="clickable" id="year_right" onclick="plusYear()">></div>
+                    </div>
+                    <div class="month">
+                        <div class="clickable" id="month_left" onclick="minusMonth()"><</div>
+                        <div id="current_month">Март</div>
+                        <div class="clickable" id="month_right" onclick="plusMonth()">></div>
+                    </div>
+                    <table class="calendar_table" id="calendar_table">
+                        <tbody>
+                            <tr class="super_row">
+                                <td>Пн</td><td>Вт</td><td>Ср</td><td>Чт</td><td>Пт</td><td>Сб</td><td>Вс</td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr class="casual_row">
+                                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div class="plans" id="plans">
+                    <div class="plans_date" id="date_of_interest"></div>
+                </div>
+            </div>
+            <h2 class="centered">Ближайшие мероприятия</h2>
+            <div class="all_events hide" id="all_events"></div>
+        </div>
+        <div class="cases_box main hide" id="cases_box"></div>
+        <div class="vacancy_box main hide"></div>
+        <div class="games_box main hide"></div>
     </main>
     <footer>
 

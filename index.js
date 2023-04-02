@@ -45,10 +45,12 @@ document.getElementById('specialisation_select').addEventListener('change',()=>{
 document.getElementById('city_select').addEventListener('change',()=>{event_specific_filter[1] = (document.getElementById('city_select').value == "Фильтр по региону"? "" :  document.getElementById('city_select').value); buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);openDateInfo(new Date().getDate());})
 document.getElementById('commercial_select').addEventListener('change',()=>{event_specific_filter[2] = (document.getElementById('commercial_select').value == "Фильтр по организатору"? "" : document.getElementById('commercial_select').value); buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);openDateInfo(new Date().getDate());})
 
-document.getElementById('menu_nav').addEventListener('click',(e)=>{changeMenuPage(e)})
+document.getElementById('menu_nav').addEventListener('click',(e)=>{changeMenuPage(e.target)})
+
 function changeMenuPage(e) {
-    e.preventDefault();
-    if (e.target.classList.contains('menu_item')) {
+    console.log(e);
+    document.getElementById('home_section').classList.add('hide');
+    if (e.classList.contains('menu_item')) {
         let menu_items = document.getElementById('menu_nav').children;
         let main = document.querySelectorAll('.main');
         for (let i=0; i<menu_items.length; i+=1) {
@@ -56,10 +58,10 @@ function changeMenuPage(e) {
             menu_items[i].classList = 'menu_item';
         }
 
-        e.target.classList = 'menu_item active';
-        if(main[e.target.id.split('menu_item_')[1]-1]) {
-            main[e.target.id.split('menu_item_')[1]-1].classList.remove('hide');
-            if (e.target.id.split('menu_item_')[1]-1 == 0) {
+        e.classList = 'menu_item active';
+        if(main[e.id.split('menu_item_')[1]-1]) {
+            main[e.id.split('menu_item_')[1]-1].classList.remove('hide');
+            if (e.id.split('menu_item_')[1]-1 == 0) {
                 document.getElementById('news_list').classList.remove('hide');
                 document.getElementById('news_box_buttons_nav').classList.remove('hide');
                 document.getElementById('suggest_news').classList.remove('hide');
@@ -71,7 +73,7 @@ function changeMenuPage(e) {
             //     document.getElementById('areas_2').classList.add('hide');
             //     document.getElementById('areas_3').classList.add('hide');
             //     document.getElementById('areas_4').classList.add('hide');
-            } else if (e.target.id.split('menu_item_')[1]-3 == 0) {
+            } else if (e.id.split('menu_item_')[1]-3 == 0) {
                 document.getElementById('calendar_box').classList = 'calendar_box calendar_background_light main';
                 document.getElementById('calendar_buttons').classList = 'calendar_buttons';
                 document.getElementById('calendar_filters').classList.remove('hide');
@@ -87,7 +89,7 @@ function changeMenuPage(e) {
                 document.getElementById('commercial_select').value = 'Фильтр по организатору';
                 buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);
                 openDateInfo(new Date().getDate());
-            } else if (e.target.id.split('menu_item_')[1]-5 == 0) {
+            } else if (e.id.split('menu_item_')[1]-5 == 0) {
                 document.getElementById('question_buttons').classList.remove('hide');
                 document.getElementById('forum_list').classList.add('hide');
                 document.getElementById('create_topic_page').classList.add('hide');
@@ -312,6 +314,7 @@ function buildFutureEvents() {
 document.getElementById('home').addEventListener('click', openHome);
 function openHome() {
     let menu_items = document.getElementById('menu_nav').children;
+    document.getElementById('home_section').classList.remove('hide');
     let main = document.querySelectorAll('.main');
     for (let i=0; i<menu_items.length; i+=1) {
         if(main[i]) main[i].classList.add('hide');
@@ -320,3 +323,9 @@ function openHome() {
 }
 
 document.getElementById('learn_home').addEventListener('click', ()=>{document.getElementById("section_2").scrollIntoView();});
+document.getElementById('news_card').addEventListener('click', ()=> {changeMenuPage(document.getElementById('menu_item_1'))});
+document.getElementById('forum_card').addEventListener('click', ()=> {changeMenuPage(document.getElementById('menu_item_2'))});
+document.getElementById('calendar_card').addEventListener('click', ()=> {changeMenuPage(document.getElementById('menu_item_3'))});
+document.getElementById('cases_card').addEventListener('click', ()=> {changeMenuPage(document.getElementById('menu_item_4'))});
+document.getElementById('vacancy_card').addEventListener('click', ()=> {changeMenuPage(document.getElementById('menu_item_5'))});
+document.getElementById('games_card').addEventListener('click', ()=> {changeMenuPage(document.getElementById('menu_item_6'))});
