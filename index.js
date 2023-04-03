@@ -48,9 +48,9 @@ document.getElementById('commercial_select').addEventListener('change',()=>{even
 document.getElementById('menu_nav').addEventListener('click',(e)=>{changeMenuPage(e.target)})
 
 function changeMenuPage(e) {
-    console.log(e);
     document.getElementById('home_section').classList.add('hide');
     if (e.classList.contains('menu_item')) {
+
         let menu_items = document.getElementById('menu_nav').children;
         let main = document.querySelectorAll('.main');
         for (let i=0; i<menu_items.length; i+=1) {
@@ -313,6 +313,7 @@ function buildFutureEvents() {
 
 document.getElementById('home').addEventListener('click', openHome);
 function openHome() {
+    document.getElementById('home_section').classList.remove('hide')
     let menu_items = document.getElementById('menu_nav').children;
     document.getElementById('home_section').classList.remove('hide');
     let main = document.querySelectorAll('.main');
