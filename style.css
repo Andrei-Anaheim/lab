@@ -665,9 +665,6 @@
     background-position: center center;
 }
 
-
-
-
 .details {
     font: normal bold 15px/20px Arial;
     border-bottom: 1px solid black;
@@ -750,6 +747,15 @@
     background-color:azure;
 }
 
+.cases_box {
+    width: 90vw;
+    margin: 10px auto;
+}
+.icd_title {
+    font: normal normal 20px/25px Arial;
+    margin: 5px;
+    cursor: pointer;
+}
 
 
 

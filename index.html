@@ -47,7 +47,7 @@
                         </div>
                         <div class="card_2_back">
                             <div class="galka doctor1"></div>
-                            <span>Узнавайте последние новости медицины первыми, будьте всегда в курсе событий</span>
+                            <span>Узнайте последние новости здравоохранения и будьте всегда в курсе событий</span>
                             <p class="details">Открыть ленту новостей</p>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="card_2_back">
                             <div class="galka doctor2"></div>
-                            <span>Задайте вопрос неравнодушным коллегам на форуме или же получите консультацию наших экспертов. </span>
+                            <span>Общайтесь с коллегам на интересующие Вас темы или же получите консультацию наших экспертов. </span>
                             <p class="details">Открыть форум</p>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="card_2_back">
                             <div class="galka doctor3"></div>
-                            <span>Узнавайте расписание ближайших научных мероприятий по интересующим Вас темам</span>
+                            <span>Узнайте расписание ближайших мероприятий по интересующим Вас направлениям</span>
                             <p class="details">Открыть календарь событий</p>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="card_2_back">
                             <div class="galka doctor4"></div>
-                            <span>Изучайте характерные клинические картины распространенных заболеваний</span>
+                            <span>Изучайте характерные клинические картины заболеваний, предоставленные нашими экспертами</span>
                             <p class="details">Открыть базу клинических случаев</p>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="card_2_back">
                             <div class="galka doctor5"></div>
-                            <span>Ищите вакансии или же находите сотрудников по широкому списку критериев</span>
+                            <span>Оставьте своё резюме или предложите вакансию в лечебном учреждении - мы поможем найти вам работу или сотрудника</span>
                             <p class="details">Открыть биржу труда</p>
                         </div>
                     </div>
@@ -107,12 +107,12 @@
                         <div class="card_2_front">
                             <div class="galka">✓</div>
                             <div class="section_subtitle">Развлечения</div>
-                            <div class="section_subsubtitle">Отдых от рутины</div>
+                            <div class="section_subsubtitle">Отдых от работы</div>
                             <div class="section_details_title">Подробнее →</div>
                         </div>
                         <div class="card_2_back">
                             <div class="galka doctor6"></div>
-                            <span>Изучайте медицину в игровой манере, совершенствуйте свои навыки, соревнуйтесь с коллегами</span>
+                            <span>Совершенствуйте свои навыки в игровой форме, соревнуйтесь с коллегами или просто поднимите себе настроение</span>
                             <p class="details">Открыть развлечения</p>
                         </div>
                     </div>
@@ -259,10 +259,10 @@
                     <div class="card__front"><p>Помощь эксперта</p></div>
                     <div class="card__back"><span>Задайте вопрос одному из экспертов сайта. Доступно для пользователей с положительной репутацией</span><p class="details">Задать вопрос</p></div>
                 </div>
-                <div class="card" id="clinical_cases">
+                <!-- <div class="card" id="clinical_cases">
                     <div class="card__front"><p>Библиотека клинических случаев</p></div>
                     <div class="card__back"><span>Изучайте клинические случаи в нашей библиотеке</span><p class="details">Подробнее</p></div>
-                </div>
+                </div> -->
             </div>
             <div class="news_list hide" id="forum_list">
                 <div class="button" id="suggest_topic">Задать вопрос</div>
@@ -502,7 +502,10 @@
             <h2 class="centered">Ближайшие мероприятия</h2>
             <div class="all_events hide" id="all_events"></div>
         </div>
-        <div class="cases_box main hide" id="cases_box"></div>
+        <div class="cases_box main hide" id="cases_box">
+            <div class="button hide" id="icd_back_button"><p id="back_button">Назад ←</p></div>
+            <div class="icd_data" id="icd_data"></div>
+        </div>
         <div class="vacancy_box main hide"></div>
         <div class="games_box main hide"></div>
     </main>
