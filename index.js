@@ -1,3 +1,8 @@
+let level = 1;
+let section = 1;
+let subsection = 0;
+let subsubsection = '';
+
 // Вход
 if (localStorage.getItem('user_labinfo')) {
     document.getElementById('login').classList.add('hide');
@@ -48,7 +53,6 @@ document.getElementById('commercial_select').addEventListener('change',()=>{even
 document.getElementById('menu_nav').addEventListener('click',(e)=>{changeMenuPage(e.target)})
 
 function changeMenuPage(e) {
-    console.log(e);
     document.getElementById('home_section').classList.add('hide');
     if (e.classList.contains('menu_item')) {
         let menu_items = document.getElementById('menu_nav').children;
@@ -73,6 +77,11 @@ function changeMenuPage(e) {
             //     document.getElementById('areas_2').classList.add('hide');
             //     document.getElementById('areas_3').classList.add('hide');
             //     document.getElementById('areas_4').classList.add('hide');
+            } else if (e.id.split('menu_item_')[1]-2 == 0) {
+                document.getElementById('question_buttons').classList.remove('hide');
+                document.getElementById('forum_list').classList.add('hide');
+                document.getElementById('create_topic_page').classList.add('hide');
+                document.getElementById('current_topic').classList.add('hide');
             } else if (e.id.split('menu_item_')[1]-3 == 0) {
                 document.getElementById('calendar_box').classList = 'calendar_box calendar_background_light main';
                 document.getElementById('calendar_buttons').classList = 'calendar_buttons';
@@ -89,11 +98,8 @@ function changeMenuPage(e) {
                 document.getElementById('commercial_select').value = 'Фильтр по организатору';
                 buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);
                 openDateInfo(new Date().getDate());
-            } else if (e.id.split('menu_item_')[1]-5 == 0) {
-                document.getElementById('question_buttons').classList.remove('hide');
-                document.getElementById('forum_list').classList.add('hide');
-                document.getElementById('create_topic_page').classList.add('hide');
-                document.getElementById('current_topic').classList.add('hide');
+            } else if (e.id.split('menu_item_')[1]-4 == 0) {
+                openICD10(level, section, subsection, subsubsection);
             }
         }
     }
@@ -329,3 +335,58 @@ document.getElementById('calendar_card').addEventListener('click', ()=> {changeM
 document.getElementById('cases_card').addEventListener('click', ()=> {changeMenuPage(document.getElementById('menu_item_4'))});
 document.getElementById('vacancy_card').addEventListener('click', ()=> {changeMenuPage(document.getElementById('menu_item_5'))});
 document.getElementById('games_card').addEventListener('click', ()=> {changeMenuPage(document.getElementById('menu_item_6'))});
+
+
+/* МКБ */
+
+window.onload = getICDData();
+let ICD_data = [];
+function getICDData() {
+    fetch('icd10.json')
+    .then(res => res.json())
+    .then(data => {
+        ICD_data = Array.from(data)
+    })
+}
+function openICD10(level, section, subsection, subsubsection) {
+    document.getElementById('icd_data').innerHTML = '';
+    document.getElementById('icd_back_button').innerHTML = '';
+    let current_filter_icd = [];
+    if (level == 1) {
+        document.getElementById('icd_back_button').classList.add('hide');
+        current_filter_icd = ICD_data.filter((el)=>el.level == level)
+    } else if (level == 2){
+        document.getElementById('icd_back_button').classList.remove('hide');
+        current_filter_icd = ICD_data.filter((el)=>el.level == level && el.section == section)
+    } else if (level == 3){
+        document.getElementById('icd_back_button').classList.remove('hide');
+        current_filter_icd = ICD_data.filter((el)=>el.level == level && el.section == section && el.subsection == subsection)
+    }  else if (level == 4){
+        document.getElementById('icd_back_button').classList.remove('hide');
+        current_filter_icd = ICD_data.filter((el)=>el.level == level && el.section == section && el.subsection == subsection && el.code.split('').length>3 && el.code.indexOf(subsubsection)!=-1)
+    }
+    for (let i=0; i<current_filter_icd.length; i+=1) {
+        let block = document.createElement('div');
+        block.className = 'icd_title'
+        block.id=`code_${i+1}_${current_filter_icd[i].code}`
+        block.innerText = `${level < 3 ? i+1: current_filter_icd[i].code }. ${current_filter_icd[i].title}`;
+        block.addEventListener('click',()=>{
+            if (level == 3) {subsubsection = block.id.split(`code_${i+1}_`)[1]; level +=1;}
+            else if (level == 2) {subsection = i+1; level +=1;}
+            else if (level == 1) {section = i+1; level +=1;}
+            openICD10(level, section, subsection, subsubsection);
+        })
+        document.getElementById('icd_data').append(block);
+    }
+    let back = document.createElement('p');
+    back.id = 'back_button';
+    back.innerText = 'Назад ←';
+    back.addEventListener('click', ()=>{ICDBack(level, section, subsection, subsubsection)})
+    document.getElementById('icd_back_button').append(back);
+}
+
+// document.getElementById('icd_back_button').addEventListener('click', ()=>{ICDBack(level)})
+function ICDBack(level, section, subsection, subsubsection) {
+    level -=1;
+    openICD10(level, section, subsection, subsubsection);
+};
