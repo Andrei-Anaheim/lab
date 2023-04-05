@@ -14,7 +14,7 @@
             <div class="menu_nav" id="menu_nav">
                 <div class="menu_item" id="menu_item_1">Новости</div>
                 <div class="menu_item" id="menu_item_2">Консультация</div>
-                <div class="menu_item" id="menu_item_3">Календарь</div>
+                <div class="menu_item" id="menu_item_3">События</div>
                 <div class="menu_item" id="menu_item_4">Клинические случаи</div>
                 <div class="menu_item" id="menu_item_5">Биржа труда</div>
                 <!-- <div class="menu_item" id="menu_item_5">Лабораторное оборудование</div> -->
@@ -136,24 +136,43 @@
                         <div class="expert_photo">Фото 1</div>
                         <div class="section_subsubtitle">Иванов<br/>Андрей Михайлович</div>
                         <div class="section_text_small">Член-корреспондент РАН<br/>Профессор<br/>Доктор медицинских наук</div>
-                        <div class="section_details_title">Подробнее →</div>
+                        <div class="section_details_title" onclick="openCurrentExpert(1)">Подробнее →</div>
                     </div>
                     <div class="section_4_item">
                         <div class="expert_photo">Фото 2</div>
                         <div class="section_subsubtitle">Шмидт<br/>Инна Олеговна</div>
                         <div class="section_text_small">Заведующая КДЛ СПБ ГБУЗ "Клиническая больница Святителя Луки"</div>
-                        <div class="section_details_title">Подробнее →</div>
+                        <div class="section_details_title" onclick="openCurrentExpert(2)">Подробнее →</div>
                     </div>
                     <div class="section_4_item">
                         <div class="expert_photo">Фото 3</div>
                         <div class="section_subsubtitle">Ковальчук<br/>Юрий Павлович</div>
                         <div class="section_text_small">Заместитель главного врача по лабораторной диагностике ПСПбГМУ им. И.П.Павлова</div>
-                        <div class="section_details_title">Подробнее →</div>
+                        <div class="section_details_title" onclick="openCurrentExpert(3)">Подробнее →</div>
                     </div>
                 </div>
-                <div class="button centered">Показать всех экспертов</div>
+                <div class="button centered" id="show_experts_button">Показать всех экспертов</div>
             </div>
         </div>
+    </div>
+    <div class="section_2 hide" id="experts_all">
+        <div class="section_2_content">
+            <div class="section_2_title">Эксперты, с которыми мы работаем</div>
+            <div class="section_2_cards" id="experts_all_cards"></div>
+        </div>
+    </div>
+    </div>
+    <div class="section_2 hide" id="current_expert">
+        <div class="current_expert_info">
+            <div class="current_expert_photo">Фото</div>
+            <div class="current_expert_titles">
+                <div class="section_subsubtitle" id="current_expert_name"></div>
+                <div class="section_text_small" id="current_expert_title"></div>
+                <div class="section_text_small" id="current_expert_additional_info">блаблабла блаблабла</div>
+            </div>
+        </div>
+        <div class="section_2_title">Предоставленные экспертом клинические случаи</div>
+        <div id="list_of_cases"></div>
     </div>
     <main>
         <div class="news_box main hide">
@@ -503,8 +522,22 @@
             <div class="all_events hide" id="all_events"></div>
         </div>
         <div class="cases_box main hide" id="cases_box">
-            <div class="button hide" id="icd_back_button"><p id="back_button">Назад ←</p></div>
-            <div class="icd_data" id="icd_data"></div>
+            <div class="calendar_buttons_big" id="cases_buttons">
+                <div class="card" id="icd">
+                    <div class="card__front"><p>База МКБ-10</p></div>
+                    <div class="card__back"><span>Находите заболевания и их диагностические коды согласно Международной классификации болезней</span><p class="details">Смотреть МКБ-10</p></div>
+                </div>
+                <div class="card" id="expert">
+                    <div class="card__front"><p>База клинических случаев</p></div>
+                    <div class="card__back"><span>Изучайте картины различных заболеваний на реальных примерах</span><p class="details">Смотреть список случаев</p></div>
+                </div>
+            </div>
+            <div class="icd_base hide" id="icd_base">
+                <div class="button hide" id="icd_back_button"><p id="back_button">Назад ←</p></div>
+                <div class="icd_title green_status" id="icd_text"></div>
+                <div class="icd_data" id="icd_data"></div>
+            </div>
+            
         </div>
         <div class="vacancy_box main hide"></div>
         <div class="games_box main hide"></div>

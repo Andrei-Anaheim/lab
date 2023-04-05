@@ -2,6 +2,7 @@ let level = 1;
 let section = 1;
 let subsection = 0;
 let subsubsection = '';
+let icd_text = [];
 
 // Вход
 if (localStorage.getItem('user_labinfo')) {
@@ -54,6 +55,8 @@ document.getElementById('menu_nav').addEventListener('click',(e)=>{changeMenuPag
 
 function changeMenuPage(e) {
     document.getElementById('home_section').classList.add('hide');
+    document.getElementById('experts_all').classList.add('hide');
+    document.getElementById('current_expert').classList.add('hide');
     if (e.classList.contains('menu_item')) {
 
         let menu_items = document.getElementById('menu_nav').children;
@@ -100,7 +103,10 @@ function changeMenuPage(e) {
                 buildCalendar(new Date().getFullYear(), new Date().getMonth(), show_date_info, event_filter[0], event_specific_filter);
                 openDateInfo(new Date().getDate());
             } else if (e.id.split('menu_item_')[1]-4 == 0) {
-                openICD10(level, section, subsection, subsubsection);
+                // openICD10(level, section, subsection, subsubsection);
+                document.getElementById('cases_buttons').classList.remove('hide');
+                document.getElementById('icd_base').classList.add('hide');
+                icd_text=[];
             }
         }
     }
@@ -320,6 +326,8 @@ function buildFutureEvents() {
 
 document.getElementById('home').addEventListener('click', openHome);
 function openHome() {
+    document.getElementById('experts_all').classList.add('hide');
+    document.getElementById('current_expert').classList.add('hide');
     document.getElementById('home_section').classList.remove('hide')
     let menu_items = document.getElementById('menu_nav').children;
     document.getElementById('home_section').classList.remove('hide');
@@ -350,7 +358,11 @@ function getICDData() {
         ICD_data = Array.from(data)
     })
 }
+
+document.getElementById('icd').addEventListener('click', ()=>{openICD10(level, section, subsection, subsubsection)})
 function openICD10(level, section, subsection, subsubsection) {
+    document.getElementById('cases_buttons').classList.add('hide');
+    document.getElementById('icd_base').classList.remove('hide');
     document.getElementById('icd_data').innerHTML = '';
     document.getElementById('icd_back_button').innerHTML = '';
     let current_filter_icd = [];
@@ -373,9 +385,9 @@ function openICD10(level, section, subsection, subsubsection) {
         block.id=`code_${i+1}_${current_filter_icd[i].code}`
         block.innerText = `${level < 3 ? i+1: current_filter_icd[i].code }. ${current_filter_icd[i].title}`;
         block.addEventListener('click',()=>{
-            if (level == 3) {subsubsection = block.id.split(`code_${i+1}_`)[1]; level +=1;}
-            else if (level == 2) {subsection = i+1; level +=1;}
-            else if (level == 1) {section = i+1; level +=1;}
+            if (level == 3) {subsubsection = block.id.split(`code_${i+1}_`)[1]; level +=1; ; icd_text.push(current_filter_icd[i].title)}
+            else if (level == 2) {subsection = i+1; level +=1; icd_text.push(current_filter_icd[i].title)}
+            else if (level == 1) {section = i+1; level +=1; icd_text.push(current_filter_icd[i].title)}
             openICD10(level, section, subsection, subsubsection);
         })
         document.getElementById('icd_data').append(block);
@@ -385,10 +397,76 @@ function openICD10(level, section, subsection, subsubsection) {
     back.innerText = 'Назад ←';
     back.addEventListener('click', ()=>{ICDBack(level, section, subsection, subsubsection)})
     document.getElementById('icd_back_button').append(back);
+    document.getElementById('icd_text').innerText = icd_text.join(' > ');
 }
 
 // document.getElementById('icd_back_button').addEventListener('click', ()=>{ICDBack(level)})
 function ICDBack(level, section, subsection, subsubsection) {
     level -=1;
+    icd_text.pop();
     openICD10(level, section, subsection, subsubsection);
 };
+
+/*Experts */
+window.onload = getExpertsData();
+let experts_data = [];
+function getExpertsData() {
+    fetch('experts.json')
+    .then(res => res.json())
+    .then(data => {
+        experts_data = Array.from(data)
+    })
+}
+
+document.getElementById('show_experts_button').addEventListener('click', openAllExperts);
+function openAllExperts() {
+    document.getElementById('home_section').classList.add('hide');
+    window.scrollTo(0, 0);
+    document.getElementById('experts_all').classList.remove('hide');
+    document.getElementById('experts_all_cards').innerHTML='';
+    for (let i=0; i<experts_data.length;i+=1) {
+        let card = document.createElement("div");
+        card.className = "section_4_item";
+        let photo = document.createElement('div')
+        photo.className = "expert_photo";
+        photo.innerText = `Фото ${i+1}`;
+        card.append(photo);
+        let name = document.createElement('div');
+        name.className = "section_subtitle";
+        let name_otchestvo = Array.from(experts_data[i].name.split(' '));
+        name_otchestvo.shift();
+        console.log(name_otchestvo)
+        name.innerHTML = `${experts_data[i].name.split(' ')[0]}<br/> ${name_otchestvo.join(' ')}`
+        card.append(name);
+        let job = document.createElement('div');
+        job.className = "section_text_small";
+        job.innerHTML = `${experts_data[i].job}`;
+        card.append(job);
+        let link = document.createElement('div');
+        link.className = "section_details_title";
+        link.id = `expert_${experts_data[i].id}`;
+        link.innerText = "Подробнее →"
+        link.addEventListener('click', ()=>{openCurrentExpert(experts_data[i].id)})
+        card.append(link);
+        document.getElementById('experts_all_cards').append(card);
+    }
+}
+
+function openCurrentExpert(id) {
+    document.getElementById('home_section').classList.add('hide');
+    window.scrollTo(0, 0);
+    document.getElementById('experts_all').classList.add('hide');
+    document.getElementById('current_expert').classList.remove('hide');
+    document.getElementById('list_of_cases').innerHTML='';
+    let current_expert_info = experts_data.filter((el)=>el.id == id)[0]
+    document.getElementById('current_expert_name').innerHTML = current_expert_info.name;
+    document.getElementById('current_expert_title').innerHTML = current_expert_info.job;
+    for (let i=0; i<current_expert_info.cases.length; i+=1) {
+        let disease_case = document.createElement("div");
+        disease_case.classList='disease_case'
+        disease_case.id=`case_${current_expert_info.cases[i].code}`
+        disease_case.innerHTML = `${i+1}. ${current_expert_info.cases[i].title} (${current_expert_info.cases[i].code})`
+
+        document.getElementById('list_of_cases').append(disease_case)
+    }
+}
