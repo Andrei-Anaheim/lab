@@ -269,8 +269,33 @@
     width:80%;
     margin-top: 10px;
     font: normal normal 30px/30px Arial;
-    text-align: center;
-    
+    text-align: center;   
+}
+
+.current_expert_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.current_expert_photo {
+    border: 1px solid red;
+    border-radius: 15px;
+    height: 300px;
+    width: 250px;
+    margin-top: 10px;
+    font: normal normal 30px/30px Arial;
+    text-align: center;   
+}
+
+.disease_case {
+    margin: 10px auto;
+    border-radius: 15px;
+    width: 50%;
+    font: normal normal 30px/30px Arial;
+    /* text-align: center; */
+    cursor: pointer;
 }
 
 /**/
