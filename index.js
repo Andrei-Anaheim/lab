@@ -107,6 +107,8 @@ function changeMenuPage(e) {
                 document.getElementById('cases_buttons').classList.remove('hide');
                 document.getElementById('icd_base').classList.add('hide');
                 icd_text=[];
+            } else if (e.id.split('menu_item_')[1]-6 == 0) {
+                buildCrossword("Все");
             }
         }
     }
@@ -435,7 +437,6 @@ function openAllExperts() {
         name.className = "section_subtitle";
         let name_otchestvo = Array.from(experts_data[i].name.split(' '));
         name_otchestvo.shift();
-        console.log(name_otchestvo)
         name.innerHTML = `${experts_data[i].name.split(' ')[0]}<br/> ${name_otchestvo.join(' ')}`
         card.append(name);
         let job = document.createElement('div');
@@ -468,5 +469,136 @@ function openCurrentExpert(id) {
         disease_case.innerHTML = `${i+1}. ${current_expert_info.cases[i].title} (${current_expert_info.cases[i].code})`
 
         document.getElementById('list_of_cases').append(disease_case)
+    }
+}
+/* Кроссворд */
+window.onload = createCrossword();
+let crossword_data = [];
+function createCrossword() {
+    fetch('crossword.json')
+    .then(res => res.json())
+    .then(data => {
+        crossword_data = Array.from(data)
+    })
+}
+let cross_right_matrix = [];
+let cross_user_matrix = [];
+let cross_numeration = [];
+let selectedcell = [];
+function buildCrossword(topic) {
+    document.getElementById('crossword_box').classList.remove('hide');
+    document.getElementById('crossword').innerHTML='';
+    document.getElementById('crossword_questions_horizontal').innerHTML='<p class="bold">По горизонтали:</p>';
+    document.getElementById('crossword_questions_vertical').innerHTML='<p class="bold">По вертикали:</p>';
+    filtered_crossword_data = crossword_data.filter((el)=>el.topic.indexOf(topic)!=-1)
+    let current_crossword = filtered_crossword_data[Math.floor(Math.random()*filtered_crossword_data.length)];
+    cross_right_matrix = Array(Number(current_crossword.height)).fill(null).map(()=>Array(Number(current_crossword.width)).fill(''));
+    cross_user_matrix = Array(Number(current_crossword.height)).fill(null).map(()=>Array(Number(current_crossword.width)).fill(''));
+    cross_numeration = Array(Number(current_crossword.height)).fill(null).map(()=>Array(Number(current_crossword.width)).fill(''));
+    for(let i=0; i<current_crossword.words.length; i+=1) {
+        if(current_crossword.words[i].direction == 'vertical') document.getElementById('crossword_questions_vertical').innerHTML += `<p>${current_crossword.words[i].number}. ${current_crossword.words[i].clue}</p>`;
+        if(current_crossword.words[i].direction == 'horizontal') document.getElementById('crossword_questions_horizontal').innerHTML += `<p>${current_crossword.words[i].number}. ${current_crossword.words[i].clue}</p>`;
+        cross_numeration[Number(current_crossword.words[i].startY)-1][Number(current_crossword.words[i].startX)-1] = i+1;
+        for(j=0;j<current_crossword.words[i].answer.length;j+=1) {
+            if(current_crossword.words[i].direction == 'vertical') cross_right_matrix[Number(current_crossword.words[i].startY)-1+j][Number(current_crossword.words[i].startX)-1] = current_crossword.words[i].answer[j];
+            else if(current_crossword.words[i].direction == 'horizontal') cross_right_matrix[Number(current_crossword.words[i].startY)-1][Number(current_crossword.words[i].startX)-1+j] = current_crossword.words[i].answer[j];
+        }
+    }
+    const table = document.createElement('table');
+    table.className = 'supertable';
+    const cross_column_width = 10;
+    const cross_column_height = 10;
+    for (let i=0; i<current_crossword.height; i+=1) {
+        const tr = table.insertRow();
+        tr.className = 'superrow';
+        for (let j=0; j<current_crossword.width; j+=1) {
+            const td = tr.insertCell();
+            td.id = `td_${i}_${j}`;
+            td.innerHTML = `<div class="cross_number">${cross_numeration[i][j]}</div><div class="cross_letter"></div>`
+            if (cross_right_matrix[i][j]=="") td.className="ordercell";
+            else {
+                td.className = "supercell";
+                td.innerHTML = `<div class="cross_number">${cross_numeration[i][j]}</div><div class="cross_letter"></div>`
+                td.addEventListener('click',()=>{selectActiveCell(i,j)});
+            }
+        }
+    }
+    document.getElementById('crossword').appendChild(table);
+    document.getElementById('crossword_questions')
+}
+
+function selectActiveCell(i,j) {
+    selectedcell=[i,j];
+    document.querySelectorAll('.supercell').forEach((el)=>el.classList.remove('selected'));
+    document.getElementById(`td_${i}_${j}`).classList.add('selected');
+}
+const keyCodeMap = {"1072":"а","1073":"б","1074":"в","1075":"г","1076":"д","1077":"е","1078":"ж","1079":"з","1080":"и","1081":"й",
+"1082":"к","1083":"л","1084":"м","1085":"н","1086":"о","1087":"п","1088":"р","1089":"с","1090":"т","1091":"у","1092":"ф","1093":"х",
+"1094":"ц","1095":"ч","1096":"ш","1097":"щ","1098":"ъ","1099":"ы","1100":"ь","1101":"э","1102":"ю","1103":"я"};
+let last_move = 'right';
+document.addEventListener('keypress', function(e) {
+    let code = e.keyCode;
+    let letter = keyCodeMap[code] || "";
+    if (selectedcell.length>0 && letter) {
+        cross_user_matrix[selectedcell[0]][selectedcell[1]] = `${letter}`;
+        document.getElementById(`td_${selectedcell[0]}_${selectedcell[1]}`).querySelector('.cross_letter').innerText = letter;
+        if(last_move == 'right') {
+            if(document.getElementById(`td_${Number(selectedcell[0])}_${Number(selectedcell[1])+1}`) && document.getElementById(`td_${Number(selectedcell[0])}_${Number(selectedcell[1])+1}`).classList.contains('supercell')) {
+                selectedcell[1]=Number(selectedcell[1]+1);
+                last_move = 'right';   
+            } else if(document.getElementById(`td_${Number(selectedcell[0])+1}_${Number(selectedcell[1])}`) && document.getElementById(`td_${Number(selectedcell[0])+1}_${Number(selectedcell[1])}`).classList.contains('supercell')) {
+                selectedcell[0]=Number(selectedcell[0]+1);
+                last_move = 'down'
+            }
+        } else {
+            if(document.getElementById(`td_${Number(selectedcell[0])+1}_${Number(selectedcell[1])}`) && document.getElementById(`td_${Number(selectedcell[0])+1}_${Number(selectedcell[1])}`).classList.contains('supercell')) {
+                selectedcell[0]=Number(selectedcell[0]+1);
+                last_move = 'down'
+            } else if(document.getElementById(`td_${Number(selectedcell[0])}_${Number(selectedcell[1])+1}`) && document.getElementById(`td_${Number(selectedcell[0])}_${Number(selectedcell[1])+1}`).classList.contains('supercell')) {
+                selectedcell[1]=Number(selectedcell[1]+1);
+                last_move = 'right';   
+            }
+        }
+    }
+    selectActiveCell(selectedcell[0],selectedcell[1]);
+    checkCrosswordComplete();
+});
+
+document.addEventListener('keydown',function(e){
+    let code = e.keyCode;
+    if (code == 8 || code == 46) {
+        document.getElementById(`td_${selectedcell[0]}_${selectedcell[1]}`).querySelector('.cross_letter').innerText = "";
+        cross_user_matrix[selectedcell[0]][selectedcell[1]] = '';
+    } else if (code == 37 && document.getElementById(`td_${Number(selectedcell[0])}_${Number(selectedcell[1])-1}`) && document.getElementById(`td_${Number(selectedcell[0])}_${Number(selectedcell[1])-1}`).classList.contains('supercell')) {
+        selectedcell[1]=Number(selectedcell[1]-1);
+        last_move = 'right';   
+    } else if (code == 39 && document.getElementById(`td_${Number(selectedcell[0])}_${Number(selectedcell[1])+1}`) && document.getElementById(`td_${Number(selectedcell[0])}_${Number(selectedcell[1])+1}`).classList.contains('supercell')) {
+        selectedcell[1]=Number(selectedcell[1]+1);
+        last_move = 'right';   
+    } else if (code == 38 && document.getElementById(`td_${Number(selectedcell[0])-1}_${Number(selectedcell[1])}`) && document.getElementById(`td_${Number(selectedcell[0])-1}_${Number(selectedcell[1])}`).classList.contains('supercell')) {
+        selectedcell[0]=Number(selectedcell[0]-1);
+        last_move = 'down';   
+    } else if (code == 40 && document.getElementById(`td_${Number(selectedcell[0])+1}_${Number(selectedcell[1])}`) && document.getElementById(`td_${Number(selectedcell[0])+1}_${Number(selectedcell[1])}`).classList.contains('supercell')) {
+        selectedcell[0]=Number(selectedcell[0]+1);
+        last_move = 'down';   
+    }
+    selectActiveCell(selectedcell[0],selectedcell[1]);
+})
+
+function checkCrosswordComplete() {
+    console.log('wtf')
+    let is_same = true;
+    for (let i=0; i<25;i+=1) {
+        for (let j=0; j<25; j+=1) {
+            if (cross_right_matrix[i][j] != cross_user_matrix[i][j]) {is_same = false}
+        }
+    }
+    console.log(is_same);
+    if(is_same) {
+        selectedcell=[];
+        document.getElementById('crossword').classList.add('disabled');
+        document.getElementById('cross_result').classList.remove('hide');
+        document.getElementById('crossword_questions_horizontal').classList.add('hide');
+        document.getElementById('crossword_questions_vertical').classList.add('hide');
     }
 }

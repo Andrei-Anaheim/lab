@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "topic": ["Все","Лаборатория"],
+        "width":"25",
+        "height":"25",
+        "words":[
+            {"number":"1","direction":"vertical", "clue": "Лабораторая одежда","answer":"халат","startX":"8","startY":"1"},
+            {"number":"2","direction":"vertical", "clue": "Основной лабораторный антисептик","answer":"этанол","startX":"13","startY":"1"},
+            {"number":"3","direction":"vertical", "clue": "Базовый тип лабораторного исследования","answer":"анализ","startX":"15","startY":"1"},
+            {"number":"4","direction":"vertical", "clue": "Микроцентрифужные пробирки","answer":"эппендорф","startX":"20","startY":"1"},
+            {"number":"5","direction":"horizontal", "clue": "Прибор для визуальной оценки результатов осадочных реакций","answer":"агглютиноскоп","startX":"8","startY":"2"},
+            {"number":"6","direction":"vertical", "clue": "Соль хлорноватистой кислоты, основной компонент большинства депротеинизаторов","answer":"гипохлорит","startX":"10","startY":"2"},
+            {"number":"7","direction":"vertical", "clue": "Конструкция, соединяющая анализаторы между собой","answer":"трек","startX":"4","startY":"5"},
+            {"number":"8","direction":"vertical", "clue": "Противогнилостный препарат","answer":"антисептик","startX":"6","startY":"5"},
+            {"number":"9","direction":"horizontal", "clue": "Состояние, характеризующееся снижением количества безъядерных плоских форменных элементов крови","answer":"тромбоцитопения","startX":"8","startY":"5"},
+            {"number":"10","direction":"horizontal", "clue": "Клетка-предшественник красного кровного ростка","answer":"нормобласт","startX":"16","startY":"7"},
+            {"number":"11","direction":"horizontal", "clue": "Сосуд, в котором поддерживается определённая влажность воздуха","answer":"эксикатор","startX":"3","startY":"8"},
+            {"number":"12","direction":"horizontal", "clue": "Химический препарат, предназначенный для химического анализа, научно-исследовательских, различных лабораторных работ","answer":"реактив","startX":"5","startY":"10"},
+            {"number":"13","direction":"vertical", "clue": "Совокупность процедур, результатом которых является информация о составе пробы","answer":"тест","startX":"13","startY":"10"},
+            {"number":"14","direction":"vertical", "clue": "Метаболит, показатель работы почек","answer":"креатинин","startX":"4","startY":"11"},
+            {"number":"15","direction":"horizontal", "clue": "Молодой эритроцит","answer":"ретикулоцит","startX":"3","startY":"13"},
+            {"number":"16","direction":"vertical", "clue": "Белая клетка крови","answer":"лейкоцит","startX":"9","startY":"13"},
+            {"number":"17","direction":"vertical", "clue": "Сосуд для перегонки","answer":"реторта","startX":"12","startY":"15"},
+            {"number":"18","direction":"horizontal", "clue": "Установление зависимости между показаниями прибора и размером измеряемой величины","answer":"калибровка","startX":"1","startY":"16"},
+            {"number":"19","direction":"vertical", "clue": "Биологический материал","answer":"проба","startX":"14","startY":"16"},
+            {"number":"20","direction":"vertical", "clue": "Полиморфноядерный лейкоцит","answer":"гранулоцит","startX":"16","startY":"16"},
+            {"number":"21","direction":"horizontal", "clue": "Поршневой насос","answer":"шприц","startX":"1","startY":"18"},
+            {"number":"22","direction":"vertical", "clue": "Точная часть образца","answer":"аликвота","startX":"20","startY":"18"},
+            {"number":"23","direction":"horizontal", "clue": "Желчный пигмент","answer":"билирубин","startX":"8","startY":"19"},
+            {"number":"24","direction":"vertical", "clue": "Единица измерения количества вещества","answer":"моль","startX":"18","startY":"20"},
+            {"number":"25","direction":"horizontal", "clue": "Герметичный аппарат для операций нагрева под давлением","answer":"автоклав","startX":"13","startY":"22"},
+            {"number":"26","direction":"horizontal", "clue": "Тип лейкоцита","answer":"базофил","startX":"11","startY":"24"},
+            {"number":"27","direction":"horizontal", "clue": "Механизм, регулирующий ток жидкости в анализаторах","answer":"клапан","startX":"18","startY":"25"}
+        ]
+
+    }
+]
